@@ -1,4 +1,5 @@
-# Coco-tours
+# Proyecto_Progra_2_Frontend
+>>>>>>> 17fbb6bf2b871f8e77e36060fe9991220ad2c9cb
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
 
