@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterClientComponent } from './components/register-client/register-client.component';
 import { ErrorComponent } from './components/error/error.component';
+
 import { NewProviderComponent } from './components/new-provider/new-provider.component';
 import { ListProvidersComponent } from './components/list-providers/list-providers.component';
 import { SearchProviderComponent } from './components/search-provider/search-provider.component';
@@ -12,10 +14,13 @@ import { ListTravelDetailsComponent } from './components/list-travel-details/lis
 import { SearchTravelDetailComponent } from './components/search-travel-detail/search-travel-detail.component';
 import { UpdateTravelDetailComponent } from './components/update-travel-detail/update-travel-detail.component';
 import { DeleteTravelDetailComponent } from './components/delete-travel-detail/delete-travel-detail.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
     {path:'login',component:LoginComponent},
+    {path:'registro-client',component:RegisterClientComponent},
+    {path:'registro-user', component:RegisterUserComponent},
     
     {path:'crear-proveedor',component:NewProviderComponent},
     {path:'listar-proveedores',component:ListProvidersComponent},
