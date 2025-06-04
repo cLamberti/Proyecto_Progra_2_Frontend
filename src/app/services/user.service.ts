@@ -1,33 +1,41 @@
-import {Injectable} from "@angular/core"
-import {server} from "./global"
-import {HttpClient,HttpHeaders} from "@angular/common/http"
-import { Observable } from "rxjs"
-import { User } from "../models/user"
+import { Injectable } from '@angular/core';
+import { server } from './global';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
-@Injectable({providedIn:'root'}) export class UserService{
-    private url:string
-    constructor(
-        private _http:HttpClient
-    ){
-        this.url=server.url
-    }
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private url: string;
 
-    login(user:User):Observable<any>{
-        let userJSON=JSON.stringify(user)
-        let headers =new HttpHeaders().set('Content-Type','application/json')
+  constructor(private _http: HttpClient) {
+    this.url = server.url;
+  }
+
+  login(user: User): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(`${this.url}login`, user, { headers });
+    // No uses JSON.stringify si ya estás usando HttpClient con JSON.
+  }
+
+  getIdentity() {
+    const identity = sessionStorage.getItem('identity');
+    return identity ? JSON.parse(identity) : null;
+  }
+
+  getToken() {
+    return sessionStorage.getItem('token');
+  }
+
+  getRole() {
+    return sessionStorage.getItem('role');
+  }
+   createUser(user:User):Observable<any>{
+        let params=JSON.stringify(user)
+        let headers=new HttpHeaders().set('Content-Type','application/json')
         let options={
             headers
         }
-        return this._http.post(this.url+'login',userJSON,options)
-    }
-    getIdentity(){
-        let identity=sessionStorage.getItem('identity')
-        if(identity){
-            return JSON.parse(identity)
-        }
-        return null
-    }
-    getToken(){
-        return sessionStorage.getItem('token')
+        return this._http.post(this.url+"user",params,options)
     }
 }
