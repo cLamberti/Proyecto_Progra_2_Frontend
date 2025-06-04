@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Buscar proveedor</h3>
+
+  <!-- Selector de tipo de búsqueda -->
+  <div class="mb-3">
+    <label for="filterType" class="form-label">Buscar por:</label>
+    <select id="filterType" class="form-select" [(ngModel)]="filterType">
+      <option value="id">ID</option>
+      <option value="name">Nombre</option>
+    </select>
+  </div>
+
+  <!-- Campo de entrada -->
+  <div class="mb-3">
+    <input type="text"
+           [(ngModel)]="searchValue"
+           class="form-control"
+           [placeholder]="filterType === 'id' ? 'Ingrese ID del proveedor' : 'Ingrese nombre del proveedor'">
+  </div>
+
+  <!-- Botón de búsqueda -->
+  <button class="btn btn-primary mb-3" (click)="search()">Buscar</button>
+
+  @if (status && status !== -1) {
+    <div class="alert alert-danger">{{ status }}</div>
+  }
+
+  <!-- Tabla de resultados (solo si hay datos) -->
+  @if (providers.length > 0) {
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of providers; track p.idProveedor) {
+          <tr>
+            <td>{{ p.idProveedor }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.descrip }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

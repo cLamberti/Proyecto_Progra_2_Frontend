@@ -1,0 +1,32 @@
+<div class="col-md-12 mt-3">
+  <h2>Eliminar proveedor</h2>
+
+  @switch(status) {
+    @case (0) {
+      <div class="alert alert-success">Proveedor eliminado exitosamente</div>
+    }
+    @case (1) {
+      <div class="alert alert-warning">Proveedor no encontrado</div>
+    }
+    @case (2) {
+      <div class="alert alert-danger">Error de servidor</div>
+    }
+  }
+
+  <form #deleteForm="ngForm" (ngSubmit)="onSubmit(deleteForm)">
+    <div class="form-group">
+      <label for="deleteType">Eliminar por:</label>
+      <select class="form-control" [(ngModel)]="deleteType" name="deleteType" required>
+        <option value="id">ID</option>
+        <option value="name">Nombre</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Valor (ID o Nombre)</label>
+      <input type="text" class="form-control" name="deleteValue" [(ngModel)]="deleteValue" required>
+    </div>
+
+    <button type="submit" class="btn btn-danger mt-3">Eliminar</button>
+  </form>
+</div>

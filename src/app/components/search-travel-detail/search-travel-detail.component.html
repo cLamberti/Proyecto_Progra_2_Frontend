@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Buscar detalle de viaje</h3>
+
+  <!-- Campo de entrada para ID -->
+  <div class="mb-3">
+    <input type="number"
+           [(ngModel)]="searchId"
+           class="form-control"
+           placeholder="Ingrese ID del detalle de viaje">
+  </div>
+
+  <!-- Botón de búsqueda -->
+  <button class="btn btn-primary mb-3" (click)="search()">Buscar</button>
+
+  @if (status && status !== -1) {
+    <div class="alert alert-danger">{{ status }}</div>
+  }
+
+  <!-- Tabla de resultados -->
+  @if (travelDetail) {
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Proveedor</th>
+          <th>Viaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ travelDetail.idDetalleViaje }}</td>
+          <td>{{ travelDetail.fecha | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ travelDetail.hora | date: 'HH:mm' }}</td>
+          <td>{{ getProviderName(travelDetail.idProveedor) }}</td>
+          <td>{{ getTipoViaje(travelDetail.idViaje) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  }
+</div>

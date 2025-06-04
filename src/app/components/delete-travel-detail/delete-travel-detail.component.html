@@ -1,0 +1,24 @@
+<div class="col-md-12 mt-3">
+  <h2>Eliminar detalle de viaje</h2>
+
+  @switch(status) {
+    @case (0) {
+      <div class="alert alert-success">Detalle eliminado exitosamente</div>
+    }
+    @case (1) {
+      <div class="alert alert-warning">Detalle no encontrado</div>
+    }
+    @case (2) {
+      <div class="alert alert-danger">Error de servidor</div>
+    }
+  }
+
+  <form #deleteForm="ngForm" (ngSubmit)="onSubmit(deleteForm)">
+    <div class="form-group">
+      <label>ID del detalle de viaje a eliminar</label>
+      <input type="number" class="form-control" name="deleteId" [(ngModel)]="deleteId" required>
+    </div>
+
+    <button type="submit" class="btn btn-danger mt-3">Eliminar</button>
+  </form>
+</div>
