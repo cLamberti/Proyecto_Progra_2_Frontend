@@ -7,39 +7,41 @@ import { Client } from '../../models/client';
 import { ClientService } from '../../services/client.service';
 import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { StatusService } from '../../services/status.service';
 
 @Component({
   selector: 'app-register',
   imports: [FormsModule, RouterLink, RouterOutlet],
-  templateUrl: './register-user.component.html',
-  styleUrl: './register-user.component.css'
+  templateUrl: './register-user-client.component.html',
+  styleUrl: './register-user-client.component.css'
 })
-export class RegisterUserComponent {
-  public status:number
+export class RegisterUserClientComponent {
   public user:User
 
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    public statusService:StatusService
   ){
-    this.status=-1
-    this.user=new User(0, "", "")
+    this.statusService.status=-1
+    this.user=new User(0, "", "", "")
   }
   changeStatus(st:number){
-    this.status=st
-    let countdown=timer(4000);
+    this.statusService.status=st
+    let countdown=timer(6000);
     countdown.subscribe(n=>{
-      this.status=-1
+      this.statusService.status=-1
     })
   }
-
   onSubmit(form:any){
+    this.user.idCliente = this.userService.getIdentityClient();
     this.userService.createUser(this.user).subscribe({
       next:(response)=>{
         console.log(response)
         if(response.generated_id){
-          form.reset()
           this.changeStatus(0)
+          this.user.idUsuario = response.generated_id
         }else{
+          form.reset
           this.changeStatus(1)
         }
       },

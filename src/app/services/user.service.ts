@@ -22,11 +22,17 @@ export class UserService {
     const identity = sessionStorage.getItem('identity');
     return identity ? JSON.parse(identity) : null;
   }
-
+  getIdentityClient() {
+    const identityClient = sessionStorage.getItem('identityClient');
+    return identityClient ? JSON.parse(identityClient) : null;
+  }
+  getIdentityAdmin() {
+    const identityAdmin = sessionStorage.getItem('identityAdmin');
+    return identityAdmin ? JSON.parse(identityAdmin) : null;
+  }
   getToken() {
     return sessionStorage.getItem('token');
   }
-
   getRole() {
     return sessionStorage.getItem('role');
   }
@@ -36,6 +42,6 @@ export class UserService {
         let options={
             headers
         }
-        return this._http.post(this.url+"user",params,options)
+        return this._http.post(this.url+"User",params,options)
     }
 }
