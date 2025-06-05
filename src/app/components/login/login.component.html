@@ -1,10 +1,4 @@
 <div class="col-md-12 mt-4">
-    <!--PARA EL MANEJO DE LOS MENSAJE SE RECOMIENDA Sweet Alert-->
-    @if(status===0){
-        <p>Usuario y/o contraseña incorrecta</p>
-    }@else if(status===1){
-        <p>Error desde el servidor</p>
-    }
     <div class="col-md-4 mx-auto">
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <h3 class="text-center">Inicion sesión</h3>

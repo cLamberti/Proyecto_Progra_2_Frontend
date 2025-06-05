@@ -1,13 +1,15 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
-import { Admin } from '../../models/admin';
-import { AdminService } from '../../services/admin.service';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
+import { Admin } from '../../../models/admin';
+import { AdminService } from '../../../services/admin.service';
 import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { StatusService } from '../../services/status.service';
+import { StatusService } from '../../../services/status.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -40,9 +42,11 @@ export class RegisterUserAdminComponent {
         if(response.generated_id){
           this.changeStatus(0)
           this.user.idUsuario = response.generated_id
+          Swal.fire('Éxito', 'Usuario administrador creado correctamente.', 'success');
         }else{
           form.reset
           this.changeStatus(1)
+          Swal.fire('Error', 'No se pudo registrar el usuario administrador.', 'error');
         }
       },
       error:(error:Error)=>{
