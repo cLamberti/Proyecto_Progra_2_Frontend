@@ -15,13 +15,13 @@
     </span>
     <form class="col-md-4 mx-auto" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
         <div class="form-group">
-            <label>User Name</label>    
-            <input type="text" class="form-control" name="userName" #name="ngModel" [(ngModel)]="user.user" 
+            <label>User Name</label>
+            <input type="text" class="form-control" name="userName" #name="ngModel" [(ngModel)]="user.user"
                     required pattern="^([A-Za-z0-9]){4,10}$">
         </div>
         <div class="form-group">
             <label>Contraseña</label>
-            <input type="text" class="form-control" name="last_name" #last_name="ngModel" [(ngModel)]="user.last_name" required>
+            <input type="text" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.password" required>
         </div>
         @if(!name.valid && name.touched){
             <small class="invalid-feedback d-block">Formato inválido</small>

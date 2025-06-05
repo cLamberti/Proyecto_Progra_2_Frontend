@@ -1,0 +1,17 @@
+.header {
+  text-align: center;
+}
+
+.left-column {
+  width: 40%;
+  padding: 10px;
+}
+
+.right-column {
+  width: 70%;
+}
+
+.tabla-viajes {
+  width: 50%;
+  padding: 10px;
+}

@@ -1,1 +1,58 @@
-<p>ad-viaje works!</p>
+<div class="header">
+  <h1>Gestión de Viajes</h1>
+</div>
+<div class="container">
+  <form class="form-container" #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
+    <div class="form-viajes left-column">
+      <div class="form-name">
+        <span>Nombre del viaje</span><br>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-sailboat"></i></span>
+          <input type="text" class="nombre-viaje form-control" placeholder="Nombre Viaje" aria-label="nombre-viaje"
+            aria-describedby="basic-addon1" #name="ngModel" [(ngModel)]="travel.type" required>
+        </div>
+      </div>
+      <div class="form-description">
+        <span>Agrega una pequeña descripción del viaje</span><br>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
+          <textarea class="form-control" aria-label="detalles importantes" #name="ngModel" [(ngModel)]="travel.description" required></textarea>
+        </div>
+      </div>
+      <br>
+      <input type="submit" class="btn btn-primary mt-2" value="Guardar viaje" [disabled]="travelForm.invalid" [routerLink]="'/ad-viaje'">
+    </div>
+  </form>
+  <div class="form-table">
+    <table class="tabla-viajes table-striped">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Índice</th>
+          <th scope="col"> Tipo</th>
+          <th scope="col"> Descripción</th>
+          <th scope="col"> Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>John</td>
+          <td>Doe</td>
+          <td>social</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
