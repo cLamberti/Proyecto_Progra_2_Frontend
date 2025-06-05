@@ -3,10 +3,13 @@ import { User } from '../../models/user';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, SweetAlert2Module],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [UserService]
@@ -31,14 +34,16 @@ export class LoginComponent {
           sessionStorage.setItem('token', response.access_token);
           sessionStorage.setItem('identity', JSON.stringify(response.logged_user));
           sessionStorage.setItem('role', response.role);
+          Swal.fire('Éxito', 'Inicio de sesion exitoso', 'success');
           this._router.navigate(['']);
         } else {
-          this.status = 0; // login fallido
+          this.status = 0;
         }
       },
       error: (err) => {
         console.log(err);
-        this.status = 1; // error de conexión u otro
+        this.status = 1;
+        Swal.fire('Error', 'Inicio de sesion fallo, Usuario y/o contraseña incorrecta', 'error');
       }
     });
   }

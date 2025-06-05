@@ -15,7 +15,6 @@ export class UserService {
   login(user: User): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post(`${this.url}login`, user, { headers });
-    // No uses JSON.stringify si ya estás usando HttpClient con JSON.
   }
 
   getIdentity() {
@@ -35,6 +34,9 @@ export class UserService {
   }
   getRole() {
     return sessionStorage.getItem('role');
+  }
+  logOut(){
+    const identity = sessionStorage.clear()
   }
    createUser(user:User):Observable<any>{
         let params=JSON.stringify(user)
