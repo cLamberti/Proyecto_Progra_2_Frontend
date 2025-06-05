@@ -8,7 +8,7 @@ import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-client',
   imports: [FormsModule, RouterLink, RouterOutlet],
   templateUrl: './register-client.component.html',
   styleUrl: './register-client.component.css'

@@ -1,27 +1,29 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { Admin } from '../../models/admin';
 import { AdminService } from '../../services/admin.service';
-import { StatusService } from '../../services/status.service';
 import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { StatusService } from '../../services/status.service';
 
 @Component({
-  selector: 'app-register-admin',
+  selector: 'app-register',
   imports: [FormsModule, RouterLink, RouterOutlet],
-  templateUrl: './register-admin.component.html',
-  styleUrl: './register-admin.component.css'
+  templateUrl: './register-user-admin.component.html',
+  styleUrl: './register-user-admin.component.css'
 })
-export class RegisterAdminComponent {
-  public admin:Admin
+export class RegisterUserAdminComponent {
+  public user:User
 
   constructor(
-    private adminService:AdminService,
+    private userService:UserService,
     public statusService:StatusService
   ){
     this.statusService.status=-1
-    this.admin=new Admin(0, "")
+    this.user=new User(0, "", "", "")
   }
   changeStatus(st:number){
     this.statusService.status=st
@@ -30,17 +32,16 @@ export class RegisterAdminComponent {
       this.statusService.status=-1
     })
   }
-
   onSubmit(form:any){
-    this.adminService.createAdmin(this.admin).subscribe({
+    this.user.idAdministrador = this.userService.getIdentityAdmin();
+    this.userService.createUser(this.user).subscribe({
       next:(response)=>{
         console.log(response)
         if(response.generated_id){
           this.changeStatus(0)
-          this.admin.idAdmin = response.generated_id
-          sessionStorage.setItem('identityAdmin', JSON.stringify(this.admin.idAdmin));
+          this.user.idUsuario = response.generated_id
         }else{
-          form.reset()
+          form.reset
           this.changeStatus(1)
         }
       },

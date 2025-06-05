@@ -27,7 +27,7 @@ export class RegisterUserClientComponent {
   }
   changeStatus(st:number){
     this.statusService.status=st
-    let countdown=timer(6000);
+    let countdown=timer(60000);
     countdown.subscribe(n=>{
       this.statusService.status=-1
     })
