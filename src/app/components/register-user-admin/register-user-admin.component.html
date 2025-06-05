@@ -1,0 +1,48 @@
+<div class="col-md-12 mt-4">
+    <h3 class="text-center">Registro de Usuario</h3>
+    <span>
+         @switch(statusService.status){
+            @case (0){
+                <div class="alert alert-success">Registro éxitoso de usuario administrador, ya puede iniciar sesión.</div>
+            }
+            @case (1){
+                <div class="alert alert-warning">Registro no guardado</div>
+            }
+            @case (2){
+                <div class="alert alert-danger">Error de servidor!</div>
+            }
+        }
+    </span>
+    <form class="col-md-4 mx-auto" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <div class="form-group">
+            <label>Nombre de usuario</label>
+            <input type="text" class="form-control" name="userName" #userName="ngModel" [(ngModel)]="user.user" 
+                    required pattern="^([A-Za-z0-9]){4,15}$">
+        </div>
+        @if(!userName.valid && userName.touched){
+            <small class="invalid-feedback d-block">Formato inválido</small>
+        }
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="text" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.password" 
+                    required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$">
+        </div>
+        @if(!password.valid && password.touched){
+            <small class="invalid-feedback d-block">Formato inválido tiene que tener al menos 8 caracteres, <br> al menos un numero y puede contener caracteres especiales </small>
+        }
+        <div class="form-group">
+            <label>Correo</label>
+            <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="user.email" 
+                    required pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b">
+        </div>
+        @if(!email.valid && email.touched){
+            <small class="invalid-feedback d-block">Formato de correo inválido</small>
+        }
+        @if (statusService.status == 0){
+            <button class="btn btn-success mt-2" [routerLink]="'/login'"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+        }
+        @else {
+            <input type="submit" class="btn btn-primary mt-2" value="Registrarse" [disabled]="registerForm.invalid">
+        }
+    </form>
+</div>

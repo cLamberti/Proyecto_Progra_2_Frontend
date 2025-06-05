@@ -3,7 +3,6 @@ import { server } from './global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../models/client';
-import { User } from '../models/user'
 
 @Injectable({ providedIn: 'root' })
 export class ClientService {
@@ -11,10 +10,6 @@ export class ClientService {
 
   constructor(private _http: HttpClient) {
     this.url = server.url;
-  }
-  getIdentity() {
-    const identity = sessionStorage.getItem('identity');
-    return identity ? JSON.parse(identity) : null;
   }
    createClient(client:Client):Observable<any>{
         let params=JSON.stringify(client)
