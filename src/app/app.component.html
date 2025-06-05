@@ -1,6 +1,6 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a id= "nav" class="navbar-brand" href="#"><img id="logo" src="logo.png" alt="logo"></a>
+      <a id= "nav" class="navbar-brand" [routerLink]="'/'"><img id="logo" src="logo.png" alt="logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> 
@@ -15,7 +15,7 @@
               <a class="nav-link" [routerLink]="['/login']"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/registro-client']"><i class="fa-solid fa-user-plus"></i> Registro</a>
+              <a class="nav-link" [routerLink]="['/register-client']"><i class="fa-solid fa-user-plus"></i> Registro</a>
             </li>
           }
            @if(role == "Admin"){
@@ -30,7 +30,7 @@
             </li>
             <ul class="navbar-nav ms-xl-5" style="padding: 0px 0px;">
               <li class="nav-item" style="padding: 0px 0px; margin-left: 5%;">
-              <a class="nav-link" [routerLink]="['/login']" style="padding: 0px 0px 0px 0px; margin-left: 150%;">
+              <a class="nav-link" [routerLink]="['/user']" style="padding: 0px 0px 0px 0px; margin-left: 150%;">
               <i class="fa-solid fa-circle-user"></i>
               <h6>{{identity.user}}</h6>
               </a>
@@ -43,7 +43,7 @@
             </li>
             <ul class="navbar-nav ms-xl-5" style="padding: 0px 0px;">
               <li class="nav-item" style="padding: 0px 0px; margin-left: 5%;">
-              <a class="nav-link" [routerLink]="['/login']" style="padding: 0px 0px 0px 0px; margin-left: 1600%;">
+              <a class="nav-link" [routerLink]="['/user']" style="padding: 0px 0px 0px 0px; margin-left: 1600%;">
               <i class="fa-solid fa-circle-user"></i>
               <h6>{{identity.user}}</h6>
               </a>
