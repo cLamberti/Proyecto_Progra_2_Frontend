@@ -3,7 +3,6 @@ import { server } from './global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../models/client';
-import { User } from '../models/user'
 
 @Injectable({ providedIn: 'root' })
 export class ClientService {
@@ -18,6 +17,6 @@ export class ClientService {
         let options={
             headers
         }
-        return this._http.post(this.url+"user",params,options)
+        return this._http.post(this.url+"Client",params,options)
     }
 }
