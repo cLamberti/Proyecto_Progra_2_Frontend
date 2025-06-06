@@ -16,7 +16,33 @@ export class UserService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post(`${this.url}login`, user, { headers });
   }
+  getAllUsers(): Observable<User[]> {
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this._http.get<User[]>(`${this.url}User/all`, { headers });
+  }
+
+  deleteUser(userId: number): Observable<any> {
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this._http.delete(`${this.url}User/${userId}`, { headers });
+  }
   getIdentity() {
     const identity = sessionStorage.getItem('identity');
     return identity ? JSON.parse(identity) : null;

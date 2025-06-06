@@ -19,4 +19,12 @@ export class ClientService {
         }
         return this._http.post(this.url+"Client",params,options)
     }
-}
+    getClientName(clientId: number): Observable<{ name: string }> {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this._http.get<{ name: string }>(`${this.url}Client/${clientId}/name`, { headers });
+  }
+} 
