@@ -42,15 +42,8 @@ logOutConfirmado() {
   }).then((result) => {
     if (result.isConfirmed) {
       this.userService.logOut();
-      Swal.fire({
-        text: 'Sesion cerrada correctamente',
-        icon: 'success',
-        confirmButtonText:'Ok'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['']);
-        }
-      });
+      this.router.navigate(['']);
+      Swal.fire('Sesión cerrada', '', 'success');
     }
   });
 }
