@@ -32,7 +32,7 @@ export class NewTravelDetailComponent implements OnInit{
     this.token = this.userService.getToken();
     if (this.token) {
       this.travelService.GetAllTravels().subscribe({
-        next: (response) => {
+        next: (response:any) => {
           console.log(response)
           this.travels = response;
         },
@@ -42,7 +42,7 @@ export class NewTravelDetailComponent implements OnInit{
       });
 
       this.providerService.GetAllProviders().subscribe({
-        next: (response) => {
+        next: (response:any) => {
           console.log(response)
           this.providers = response;
         },
