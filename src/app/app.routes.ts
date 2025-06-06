@@ -18,6 +18,13 @@ import { RegisterUserAdminComponent } from './components/register/register-user-
 import { UserComponent } from './components/gestionUsuarios/user/user.component';
 import { UsersComponent } from './components/gestionUsuarios/users/users.component';
 import { User } from './models/user';
+export const routes: Routes = [
+    {path:'',component:HomeComponent},
+    {path:'login',component:LoginComponent},
+    {path:'register-client',component:RegisterClientComponent},
+    {path:'register-user-client', component:RegisterUserClientComponent},
+    {path:'register-admin', component:RegisterAdminComponent},
+    {path:'register-user-admin', component:RegisterUserAdminComponent},
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

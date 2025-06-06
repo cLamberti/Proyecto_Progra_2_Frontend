@@ -31,19 +31,11 @@ export class LoginComponent {
     this._userService.login(this.user).subscribe({
       next: (response: any) => {
         if (response.access_token) {
-          Swal.fire({
-            title: 'Exito',
-            text: 'Inicio de sesion exitoso',
-            icon: 'success',
-            confirmButtonText:'Ok'
-          }).then((result) => {
-            if (result.isConfirmed) {
-            sessionStorage.setItem('token', response.access_token);
-            sessionStorage.setItem('identity', JSON.stringify(response.logged_user));
-            sessionStorage.setItem('role', response.role);
-            this._router.navigate(['']);
-            }
-            });;
+          sessionStorage.setItem('token', response.access_token);
+          sessionStorage.setItem('identity', JSON.stringify(response.logged_user));
+          sessionStorage.setItem('role', response.role);
+          Swal.fire('Éxito', 'Inicio de sesion exitoso', 'success');
+          this._router.navigate(['']);
         } else {
           this.status = 0;
         }

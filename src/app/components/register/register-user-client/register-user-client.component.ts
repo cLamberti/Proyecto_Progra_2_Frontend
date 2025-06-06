@@ -10,8 +10,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { StatusService } from '../../../services/status.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-register',
@@ -24,8 +22,7 @@ export class RegisterUserClientComponent {
 
   constructor(
     private userService:UserService,
-    public statusService:StatusService,
-    private router:Router
+    public statusService:StatusService
   ){
     this.statusService.status=-1
     this.user=new User(0, "", "", "")
@@ -43,16 +40,7 @@ export class RegisterUserClientComponent {
       next:(response)=>{
         console.log(response)
         if(response.generated_id){
-          Swal.fire({
-            title:'Exito',
-            text:'Registro de usuario exitoso ya puede iniciar sesión',
-            icon:'success',
-            confirmButtonText:'Iniciar sesión'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/login']);
-            }
-          });
+          Swal.fire('Éxito', 'Usuario creado correctamente.', 'success');
           this.changeStatus(0)
           this.user.idUsuario = response.generated_id
         }else{
