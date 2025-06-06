@@ -8,6 +8,7 @@ import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-admin',
@@ -20,7 +21,8 @@ export class RegisterAdminComponent {
 
   constructor(
     private adminService:AdminService,
-    public statusService:StatusService
+    public statusService:StatusService,
+    private router:Router
   ){
     this.statusService.status=-1
     this.admin=new Admin(0, "")
@@ -41,12 +43,21 @@ export class RegisterAdminComponent {
           this.changeStatus(0)
           this.admin.idAdmin = response.generated_id
           sessionStorage.setItem('identityAdmin', JSON.stringify(this.admin.idAdmin));
-          Swal.fire('Éxito', 'Nombre creado correctamente, dele a siguiente para continuar con el registro', 'success');
-        }else{
-          form.reset()
-          this.changeStatus(1)
-          Swal.fire('Error', 'No se pudo registrar el nombre.', 'error');
-        }
+          Swal.fire({
+                      title: 'exito',
+                      text: 'Registro de nombre correcto, ya puede seguir con el registro',
+                      icon:'success',
+                      confirmButtonText:'Continuar?'
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        this.router.navigate(['/register-user-admin']);
+                      }
+                    });
+                  }else{
+                    form.reset()
+                    this.changeStatus(1)
+                    Swal.fire('Error', 'No se pudo registrar el nombre.', 'error');
+                  }
       },
       error:(error:Error)=>{
         console.log(error)

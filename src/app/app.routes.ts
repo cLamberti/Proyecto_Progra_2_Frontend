@@ -25,6 +25,8 @@ export const routes: Routes = [
     {path:'register-user-client', component:RegisterUserClientComponent},
     {path:'register-admin', component:RegisterAdminComponent},
     {path:'register-user-admin', component:RegisterUserAdminComponent},
+    {path:'users', component:UsersComponent},
+    {path:'user', component:UserComponent},
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
