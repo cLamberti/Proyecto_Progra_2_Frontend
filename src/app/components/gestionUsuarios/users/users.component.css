@@ -1,0 +1,29 @@
+.table-responsive {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  background-color: #343a40 !important;
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.bi {
+  margin-right: 5px;
+}
+
+.input-group {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
