@@ -1,0 +1,32 @@
+<div class="col-md-12 mt-4">
+    <h3 class="text-center">Registro de Usuario administrador</h3>
+    <span>
+         @switch(statusService.status){
+            @case (0){
+                <div class="alert alert-success">Registro éxitoso su id es: {{admin.idAdmin}}</div>
+            }
+            @case (1){
+                <div class="alert alert-warning">Registro no guardado</div>
+            }
+            @case (2){
+                <div class="alert alert-danger">Error de servidor!</div>
+            }
+        }
+    </span>
+    <form class="col-md-4 mx-auto" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <div class="form-group">
+            <label>Nombre Completo</label>
+            <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="admin.name" 
+                    required pattern="^([A-ZÁÉÍÓÚÑa-záéíóúñ]{3,})(\s[A-ZÁÉÍÓÚÑa-záéíóúñ]{4,})*$">
+        </div>
+        @if(!name.valid && name.touched){
+            <small class="invalid-feedback d-block">Formato inválido</small>
+        }
+        @if (statusService.status == 0){
+            <button class="btn btn-success mt-2" [routerLink]="'/register-user-admin'"> Siguiente</button>
+        }
+        @else {
+            <input type="submit" class="btn btn-primary mt-2" value="Siguiente" [disabled]="registerForm.invalid">
+        }
+    </form>
+</div>
