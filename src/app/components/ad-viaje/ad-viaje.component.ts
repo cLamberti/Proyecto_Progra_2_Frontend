@@ -19,11 +19,12 @@ export class AdViajeComponent {
   public travels: any
   private checkTravels: any
   public token: any
-  public searchId: number = 0
+  public searchId: number
   public showSingleTravel = false
 
   constructor(private travelService: TravelService, private userService: UserService) {
     this.status = -1
+    this.searchId = 0
     this.travel = new Travel(0, "", "")
     this.loadTravels()
     this.checkTravels = setInterval(() => {
@@ -108,8 +109,8 @@ export class AdViajeComponent {
         console.log(response)
         if (response.generated_id) {
           form.reset()
-          this.loadTravels()
           this.changeStatus(0)
+          this.loadTravels()
         } else {
           this.changeStatus(1)
         }
