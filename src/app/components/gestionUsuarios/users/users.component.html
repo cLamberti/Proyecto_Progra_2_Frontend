@@ -1,28 +1,36 @@
-<!-- Cambia *ngIf -->
-@if (isLoading) {
-  <tr>
-    <td colspan="4" class="text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-    </td>
-  </tr>
-}
+<div class="container mt-4">
+  <h2 class="text-center">Gestión de Usuarios</h2>
 
-<!-- Cambia *ngFor -->
-@for (user of filteredUsers; track user.idUsuario) {
-  <tr>
-    <td>{{ user.user }}</td>
-    <td>{{ user.email }}</td>
-    <td>
-      <button class="btn btn-danger btn-sm" 
-              (click)="deleteUser(user.idUsuario, user.user)">
-        <i class="bi bi-trash"></i> Eliminar
-      </button>
-    </td>
-  </tr>
-} @empty {
-  <tr>
-    <td colspan="4" class="text-center">No se encontraron usuarios</td>
-  </tr>
-}
+  <input
+    type="text"
+    class="form-control mb-3"
+    placeholder="Buscar por nombre, usuario, rol o correo"
+    [(ngModel)]="searchTerm"
+    (input)="search()"
+  />
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Rol en el sistema</th>
+        <th>Acción</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{ user.idUsuario }}</td>
+        <td>{{user.name}}</td>
+        <td>{{ user.user }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td class="text-center">
+          <button class="btn btn-danger" (click)="deleteUser(user.idUsuario)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

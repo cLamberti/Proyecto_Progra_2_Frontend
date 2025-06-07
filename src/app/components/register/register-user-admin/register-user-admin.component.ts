@@ -12,7 +12,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-user-admin',
   imports: [FormsModule, RouterLink, RouterOutlet],
   templateUrl: './register-user-admin.component.html',
   styleUrl: './register-user-admin.component.css'

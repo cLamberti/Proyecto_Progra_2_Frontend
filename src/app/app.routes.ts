@@ -22,6 +22,5 @@ export const routes: Routes = [
     {path:'user', component:UserComponent},
     {path: 'ad-viaje', component: AdViajeComponent },
     
-
     {path:'**',component:ErrorComponent}
 ];
