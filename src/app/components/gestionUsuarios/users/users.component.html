@@ -12,6 +12,13 @@
   <table class="table table-bordered table-hover">
     <thead class="table-primary">
       <tr>
+        <th>
+          <input
+            type="checkbox"
+            [checked]="isAllSelected()"
+            (change)="toggleSelectAll()"
+          />
+        </th>
         <th>ID</th>
         <th>Nombre</th>
         <th>Usuario</th>
@@ -21,7 +28,14 @@
       </tr>
     </thead>  
     <tbody>
-      <tr *ngFor="let user of filteredUsers">
+      <tr *ngFor="let user of paginatedUsers">
+        <td>
+          <input
+            type="checkbox"
+            [checked]="selectedUserIds.includes(user.idUsuario)"
+            (change)="toggleSelection(user.idUsuario)"
+          />
+        </td>
         <td>{{ user.idUsuario }}</td>
         <td>{{user.name}}</td>
         <td>{{ user.user }}</td>
@@ -33,4 +47,21 @@
       </tr>
     </tbody>
   </table>
+  <nav *ngIf="totalPages > 1" class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+  
+  <span>Página {{ currentPage }} de {{ totalPages }}</span>
+  
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+</nav>
+<div id="buttons-users">
+<button
+  class="btn btn-danger"
+  (click)="deleteSelectedUsers()"
+  [disabled]="selectedUserIds.length === 0"
+>
+  <p style="font-size:small;">Eliminar {{ selectedUserIds.length }} usuario(s)</p>
+</button>
+<button [routerLink]="'/register-admin'" style="margin-left: 4%;" class="btn btn-primary">Registrar administrador</button>
+</div>
 </div>

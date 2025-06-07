@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-user-client',
   imports: [FormsModule, RouterLink, RouterOutlet],
   templateUrl: './register-user-client.component.html',
   styleUrl: './register-user-client.component.css'

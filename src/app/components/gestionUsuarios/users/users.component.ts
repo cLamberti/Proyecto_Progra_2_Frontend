@@ -9,6 +9,8 @@ import { Client } from '../../../models/client';
 import { ClientService } from '../../../services/client.service';
 import { Admin } from '../../../models/admin';
 import { AdminService } from '../../../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -17,7 +19,9 @@ import { AdminService } from '../../../services/admin.service';
   imports: [
     FormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    RouterLink,
+    RouterOutlet
   ]
 })
 export class UsersComponent implements OnInit {
@@ -27,12 +31,23 @@ export class UsersComponent implements OnInit {
   filteredUsers: User[] = [];
   filteredClients: Client[]=[];
   filteredAdmins: Admin[]=[];
+  selectedUserIds: number[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
+  paginatedUsers: User[] = [];
+  totalPages: number = 0;
   searchTerm: string = '';
 
-  constructor(private userService: UserService,private clientService: ClientService, private adminService: AdminService) {}
+  constructor(private userService: UserService,private clientService: ClientService, private adminService: AdminService,private _route: Router) {}
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+  updatePaginatedUsers(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.filteredUsers.length / this.pageSize);
   }
   getNameForUser(u: any): string {
   let name = '';
@@ -47,6 +62,11 @@ export class UsersComponent implements OnInit {
 
   return name;
 }
+isAllSelected(): boolean {
+  return this.filteredUsers.length > 0 &&
+         this.filteredUsers.every(user => this.selectedUserIds.includes(user.idUsuario));
+}
+
 
   loadUsers(): void {
   this.clientService.getClient().subscribe(
@@ -81,6 +101,7 @@ export class UsersComponent implements OnInit {
 
               this.users = mappedUsers;
               this.filteredUsers = mappedUsers;
+              this.updatePaginatedUsers();
             },
             (error) => {
               console.error('Error al cargar usuarios', error);
@@ -97,7 +118,82 @@ export class UsersComponent implements OnInit {
     }
   );
 }
+changePage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+    this.updatePaginatedUsers();
+  }
+}
 
+
+toggleSelection(userId: number): void {
+  const index = this.selectedUserIds.indexOf(userId);
+  if (index > -1) {
+    this.selectedUserIds.splice(index, 1);
+  } else {
+    this.selectedUserIds.push(userId);
+  }
+}
+
+allSelected(): boolean {
+  return this.paginatedUsers.length > 0 && this.paginatedUsers.every(user => this.selectedUserIds.includes(user.idUsuario));
+}
+
+toggleSelectAll(): void {
+  if (this.isAllSelected()) {
+    // Deseleccionar todos
+    this.filteredUsers.forEach(user => {
+      const index = this.selectedUserIds.indexOf(user.idUsuario);
+      if (index > -1) {
+        this.selectedUserIds.splice(index, 1);
+      }
+    });
+  } else {
+    // Seleccionar todos
+    this.filteredUsers.forEach(user => {
+      if (!this.selectedUserIds.includes(user.idUsuario)) {
+        this.selectedUserIds.push(user.idUsuario);
+      }
+    });
+  }
+}
+
+  deleteSelectedUsers(): void {
+  if (this.selectedUserIds.length === 0) {
+    Swal.fire('Atención', 'No hay usuarios seleccionados.', 'info');
+    return;
+  }
+
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: `Se eliminarán ${this.selectedUserIds.length} usuarios`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sí, eliminar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const deleteRequests = this.selectedUserIds.map(id =>
+        this.userService.deleteUser(id),
+        this._route.navigate(['/users'])
+      );
+
+      Promise.all(deleteRequests.map(obs => obs.toPromise()))
+        .then(() => {
+          this.users = this.users.filter(user => !this.selectedUserIds.includes(user.idUsuario));
+          this.filteredUsers = this.filteredUsers.filter(user => !this.selectedUserIds.includes(user.idUsuario));
+          this.selectedUserIds = [];
+          Swal.fire('Eliminados', 'Los usuarios han sido eliminados.', 'success');
+          this._route.navigate(['/users']);
+        })
+        .catch((error) => {
+          console.error('Error al eliminar usuarios', error);
+          Swal.fire('Error', 'No se pudo eliminar algunos usuarios.', 'error');
+        });
+    }
+  });
+}
 
   deleteUser(id: number): void {
     Swal.fire({
@@ -127,12 +223,13 @@ export class UsersComponent implements OnInit {
 
   search(): void {
   const term = this.searchTerm.toLowerCase();
-
   this.filteredUsers = this.users.filter(user =>
     user.user.toLowerCase().includes(term) ||
     user.email.toLowerCase().includes(term) ||
     user.role.toLocaleLowerCase().includes(term) ||
     (user.name && user.name.toLowerCase().includes(term))
   );
-}
+  this.currentPage = 1;
+  this.updatePaginatedUsers();
+  }
 }
