@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { Provider } from '../../models/provider';
-import { ProviderService } from '../../services/provider.service';
-import { UserService } from '../../services/user.service';
+import { Provider } from '../../../models/provider';
+import { ProviderService } from '../../../services/provider.service';
+import { UserService } from '../../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-update-provider',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink,RouterOutlet],
   templateUrl: './update-provider.component.html',
   styleUrl: './update-provider.component.css'
 })
@@ -40,11 +41,17 @@ export class UpdateProviderComponent {
         this.status = 1
         return
       }
+      
+      const updateDataId = {
+        name: this.provider.nombre,
+        descript: this.provider.descrip
+      };
 
-      this.providerService.UpdateProviderById(id, this.provider, this.token).subscribe({
+      this.providerService.UpdateProviderById(id, updateDataId, this.token).subscribe({
         next:(response:any)=>{
           console.log(response)
           this.status = 0 // Éxito
+          form.reset()
         },
         error:(err:Error)=>{
           console.log(err)
@@ -52,19 +59,25 @@ export class UpdateProviderComponent {
         }
       });
     } else if (this.searchType === 'name') {
+
       const updateData = {
-        new_name: this.provider.nombre,
-        descrip: this.provider.descrip
+        new_name: this.provider.nombre || "",
+        descript: this.provider.descrip || ""
       };
 
       this.providerService.UpdateProviderByName(this.searchValue, updateData, this.token).subscribe({
         next:(response:any)=>{
           console.log(response)
-          this.status = 0 // Éxito
+          // console.log('Datos que se envían:', this.provider)
+          this.status = 0
+          // Solo reiniciar los campos manualmente
+          // this.provider = new Provider(0, "", "");
+          // this.searchValue = '';
+          form.reset()
         },
         error:(err:Error)=>{
           console.log(err)
-          this.status = 2 // Error de servidor  
+          this.status = 2
         }
       });
     }

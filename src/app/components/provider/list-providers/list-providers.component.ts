@@ -1,19 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ProviderService } from '../../services/provider.service';
-import { Provider } from '../../models/provider';
+import { ProviderService } from '../../../services/provider.service';
+import { Provider } from '../../../models/provider';
+import { UserService } from '../../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-list-providers',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink,RouterOutlet],
   templateUrl: './list-providers.component.html',
   styleUrl: './list-providers.component.css'
 })
 export class ListProvidersComponent implements OnInit{
   public status:number
   public providers: Provider[] = []
-  constructor(private providerService: ProviderService){
+  private token:any 
+
+  constructor(
+    private providerService: ProviderService,
+    private userService:UserService    
+  ){
     this.status=-1
   }
 
@@ -22,13 +29,15 @@ export class ListProvidersComponent implements OnInit{
   }
 
   GetAllProviders(): void {
-    this.providerService.GetAllProviders().subscribe({
+    this.token=this.userService.getToken()    
+    this.providerService.GetAllProviders(this.token).subscribe({
       next: (response) => {
         console.log(response)
         this.providers = response;
       },
       error: (err:Error) => {
         console.error(err);
+        this.status = 2;
       }
     });
   }

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProviderService } from '../../services/provider.service';
-import { UserService } from '../../services/user.service';
+import { ProviderService } from '../../../services/provider.service';
+import { UserService } from '../../../services/user.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-delete-provider',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink,RouterOutlet],
   templateUrl: './delete-provider.component.html',
   styleUrl: './delete-provider.component.css'
 })
@@ -43,6 +44,7 @@ export class DeleteProviderComponent {
         next:(response:any)=>{
           console.log(response)
           this.status = 0
+          form.reset()
         },
         error:(err:Error)=>{
           console.log(err)
@@ -55,6 +57,7 @@ export class DeleteProviderComponent {
         next:(response:any)=>{
           console.log(response)
           this.status = 0 
+          form.reset()
         },
         error:(err:Error)=>{
           console.log(err)

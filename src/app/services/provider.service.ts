@@ -14,54 +14,69 @@ export class ProviderService {
     this.accessToken=""
   }
 
-  GetAllProviders():Observable<any>{
-    const headers=new HttpHeaders().set('Content-Type','application/json')       
+  GetAllProviders(token:any):Observable<any>{
+    this.accessToken="bearer "+token    
+    const headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)    
     const options={
       headers
     }
-    return this._http.get(this.url+'provider/all',options)
+    return this._http.get(this.url+'Provider/all',options)
   }
 
-  CreateProvider(provider:Provider,token:any):Observable<any>{
+  CreateProvider(provider: { name: string; descript: string },token:any):Observable<any>{
     this.accessToken="bearer "+token
-    let headers=new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.accessToken)
+    let headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)
     let options={
       headers
     }
     let data=JSON.stringify(provider)
-    return this._http.post(this.url+'provider',data,options)
+    return this._http.post(this.url+'Provider',data,options)
   }
 
-  GetProviderById(id: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json')
-    const options = { headers }
-    return this._http.get(this.url + 'provider/' + id, options)
+  GetProviderById(id: number,token:any): Observable<any> {
+    this.accessToken="bearer "+token    
+    const headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)    
+    const options={
+      headers
+    }
+    return this._http.get(this.url + 'Provider/' + id, options)
   }
 
-  GetProviderByName(name: string): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json')
-    const options = { headers }
-    return this._http.get(this.url + 'provider/name/' + name, options)
+  GetProviderByName(name: string,token:any): Observable<any> {
+    this.accessToken="bearer "+token    
+    const headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)    
+    const options={
+      headers
+    }
+    return this._http.get(this.url + 'Provider/name/' + name, options)
   }
 
-  UpdateProviderById(id: number, provider: Provider, token: any): Observable<any> {
+  UpdateProviderById(id: number, provider: { name: string; descript: string }, token: any): Observable<any> {
     this.accessToken = "bearer " + token
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', this.accessToken)
     const options = { headers }
     const data = JSON.stringify(provider)
-    return this._http.patch(this.url + 'provider/update/' + id, data, options)
+    return this._http.patch(this.url + 'Provider/update/' + id, data, options)
   }
 
-  UpdateProviderByName(name: string, provider: { new_name: string; descrip: string }, token: any): Observable<any> {
+  UpdateProviderByName(name: string, provider: { new_name: string; descript: string }, token: any): Observable<any> {
     this.accessToken = "bearer " + token
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', this.accessToken)
     const options = { headers }
-    const data = JSON.stringify(provider)
-    return this._http.patch(this.url + 'provider/update/name/' + name, data, options)
+    // const data = JSON.stringify(provider)
+    return this._http.patch(this.url + 'Provider/update/name/' + name, provider, options)
   }
 
   DeleteProviderById(id: number, token: any): Observable<any> {
@@ -70,7 +85,7 @@ export class ProviderService {
       .set('Content-Type', 'application/json')
       .set('Authorization', this.accessToken)
     const options = { headers }
-    return this._http.delete(this.url + 'provider/delete/' + id, options)
+    return this._http.delete(this.url + 'Provider/delete/' + id, options)
   }
 
   DeleteProviderByName(name: string, token: any): Observable<any> {
@@ -79,6 +94,6 @@ export class ProviderService {
       .set('Content-Type', 'application/json')
       .set('Authorization', this.accessToken)
     const options = { headers }
-    return this._http.delete(this.url + 'provider/delete/name/' + name, options)
+    return this._http.delete(this.url + 'Provider/delete/name/' + name, options)
   }
 }

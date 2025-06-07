@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TravelDetail } from '../../models/travelDetail';
-import { TravelDetailService } from '../../services/travelDetail.service';
-import { UserService } from '../../services/user.service';
-import { TravelService } from '../../services/travel.service';
-import { ProviderService } from '../../services/provider.service';
+import { TravelDetail } from '../../../models/travelDetail';
+import { TravelDetailService } from '../../../services/travelDetail.service';
+import { UserService } from '../../../services/user.service';
+//import { TravelService } from '../../../services/travel.service';
+import { ProviderService } from '../../../services/provider.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-new-travel-detail',
@@ -22,7 +23,7 @@ export class NewTravelDetailComponent implements OnInit{
   constructor(
     private travelDetailService: TravelDetailService,
     private userService: UserService,
-    private travelService: TravelService,
+    //private travelService: TravelService,
     private providerService: ProviderService
   ) {
     this.travelDetail = new TravelDetail(1,'', '', 0, 0);
@@ -31,17 +32,17 @@ export class NewTravelDetailComponent implements OnInit{
   ngOnInit(): void {
     this.token = this.userService.getToken();
     if (this.token) {
-      this.travelService.GetAllTravels().subscribe({
-        next: (response:any) => {
-          console.log(response)
-          this.travels = response;
-        },
-        error: (err:Error) => {
-          console.error(err);
-        }
-      });
+      //this.travelService.GetAllTravels().subscribe({
+        //next: (response:any) => {
+          //console.log(response)
+          //this.travels = response;
+        //},
+        //error: (err:Error) => {
+          //console.error(err);
+        //}
+      //});
 
-      this.providerService.GetAllProviders().subscribe({
+      this.providerService.GetAllProviders(this.token).subscribe({
         next: (response:any) => {
           console.log(response)
           this.providers = response;

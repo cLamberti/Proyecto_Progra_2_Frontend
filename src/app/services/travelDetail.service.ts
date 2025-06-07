@@ -14,8 +14,11 @@ export class TravelDetailService {
     this.accessToken=""
   }
 
-  getAllDetails():Observable<any>{
-    const headers=new HttpHeaders().set('Content-Type','application/json')       
+  getAllDetails(token:any):Observable<any>{
+    this.accessToken="bearer "+token    
+    const headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)    
     const options={
       headers
     }
@@ -32,9 +35,14 @@ export class TravelDetailService {
     return this._http.post(this.url+'Details',data,options)
   }
 
-  getDetailsByID(id: number): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json')
-    const options = { headers }
+  getDetailsByID(id: number,token:any): Observable<any> {
+    this.accessToken="bearer "+token    
+    const headers=new HttpHeaders()
+      .set('Content-Type','application/json')
+      .set('Authorization',this.accessToken)    
+    const options={
+      headers
+    }
     return this._http.get(this.url + 'Details/' + id, options)
   }
 

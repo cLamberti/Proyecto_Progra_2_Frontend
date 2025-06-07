@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TravelDetail } from '../../models/travelDetail';
+import { TravelDetail } from '../../../models/travelDetail';
 import { FormsModule } from '@angular/forms';
-import { TravelDetailService } from '../../services/travelDetail.service';
+import { TravelDetailService } from '../../../services/travelDetail.service';
 
 @Component({
   selector: 'app-search-travel-detail',
@@ -36,9 +36,9 @@ export class SearchTravelDetailComponent{
     });
   }
 
-  getProviderName(idProveedor: number | null): string {
-  if (idProveedor === null) return 'Sin proveedor';
-    const proveedor = this.providers.find(p => p.idProveedor === idProveedor);
+  getProviderName(idproveedor: number | null): string {
+  if (idproveedor === null) return 'Sin proveedor';
+    const proveedor = this.providers.find(p => p.idproveedor === idproveedor);
     return proveedor ? proveedor.nombre : 'Proveedor desconocido';
   }
 

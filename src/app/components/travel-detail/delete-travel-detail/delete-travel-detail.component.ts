@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TravelDetailService } from '../../services/travelDetail.service';
-import { UserService } from '../../services/user.service';
+import { TravelDetailService } from '../../../services/travelDetail.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-delete-travel-detail',
