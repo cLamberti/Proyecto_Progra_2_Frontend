@@ -19,5 +19,15 @@ export class AdminService {
             .set('Authorization', `Bearer ${token}`);
         return this._http.post(this.url + "Admin", params, { headers });
     }
-
+    getToken() {
+    return sessionStorage.getItem('token');
+  }
+  getAdmin(): Observable<Admin[]> {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    return this._http.get<Admin[]>(`${this.url}Admin/all`, { headers });
+  }
 }

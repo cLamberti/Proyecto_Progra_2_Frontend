@@ -24,7 +24,7 @@ export class LoginComponent {
     private _routes: ActivatedRoute
   ) {
     this.status = -1;
-    this.user = new User(0, '', '', '', 0, 0);
+    this.user = new User(0, '', '', '', '', 0, 0);
   }
 
   onSubmit(form: any) {
