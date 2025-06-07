@@ -20,7 +20,7 @@ export const routes: Routes = [
     {path:'register-user-admin', component:RegisterUserAdminComponent},
     {path:'users', component:UsersComponent},
     {path:'user', component:UserComponent},
-    {path: 'ad-viaje', component: AdViajeComponent },
+    {path: 'ad-viaje', component: AdViajeComponent },   
     
     {path:'**',component:ErrorComponent}
 ];

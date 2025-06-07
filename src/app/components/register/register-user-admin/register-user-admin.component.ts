@@ -10,6 +10,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { StatusService } from '../../../services/status.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user-admin',
@@ -22,7 +23,8 @@ export class RegisterUserAdminComponent {
 
   constructor(
     private userService:UserService,
-    public statusService:StatusService
+    public statusService:StatusService,
+    private router:Router
   ){
     this.statusService.status=-1
     this.user=new User(0, "", "", "")
@@ -35,24 +37,33 @@ export class RegisterUserAdminComponent {
     })
   }
   onSubmit(form:any){
-    this.user.idAdministrador = this.userService.getIdentityAdmin();
-    this.userService.createUser(this.user).subscribe({
-      next:(response)=>{
-        console.log(response)
-        if(response.generated_id){
-          this.changeStatus(0)
-          this.user.idUsuario = response.generated_id
-          Swal.fire('Éxito', 'Usuario administrador creado correctamente.', 'success');
-        }else{
-          form.reset
-          this.changeStatus(1)
-          Swal.fire('Error', 'No se pudo registrar el usuario administrador.', 'error');
+      this.user.idAdministrador = this.userService.getIdentityAdmin();
+      this.userService.createUser(this.user).subscribe({
+        next:(response)=>{
+          console.log(response)
+          if(response.generated_id){
+            Swal.fire({
+              title:'Exito',
+              text:'Registro de usuario admin exitoso ya puede iniciar sesión',
+              icon:'success',
+              confirmButtonText:'Iniciar sesión'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/login']);
+              }
+            });
+            this.changeStatus(0)
+            this.user.idUsuario = response.generated_id
+          }else{
+            form.reset
+            this.changeStatus(1)
+            Swal.fire('Error', 'No se pudo registrar el usuario admin.', 'error');
+          }
+        },
+        error:(error:Error)=>{
+          console.log(error)
+          this.changeStatus(2)
         }
-      },
-      error:(error:Error)=>{
-        console.log(error)
-        this.changeStatus(2)
-      }
-    })
-  }
+      })
+    }
 }
