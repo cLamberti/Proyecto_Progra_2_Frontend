@@ -17,6 +17,10 @@ import { DeleteTravelDetailComponent } from './components/travel-detail/delete-t
 import { RegisterUserClientComponent } from './components/register/register-user-client/register-user-client.component';
 import { RegisterAdminComponent } from './components/register/register-admin/register-admin.component';
 import { RegisterUserAdminComponent } from './components/register/register-user-admin/register-user-admin.component';
+import { UserComponent } from './components/gestionUsuarios/user/user.component';
+import { UsersComponent } from './components/gestionUsuarios/users/users.component';
+import { AdViajeComponent } from './components/ad-viaje/ad-viaje.component';
+import { User } from './models/user';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -25,6 +29,7 @@ export const routes: Routes = [
     {path:'register-user-client', component:RegisterUserClientComponent},
     {path:'register-admin', component:RegisterAdminComponent},
     {path:'register-user-admin', component:RegisterUserAdminComponent},
+
     
     {path:'crear-proveedor',component:NewProviderComponent},
     {path:'listar-proveedores',component:ListProvidersComponent},
@@ -36,7 +41,11 @@ export const routes: Routes = [
     {path:'listar-detalleViaje',component:ListTravelDetailsComponent},    
     {path:'buscar-detalleViaje',component:SearchTravelDetailComponent},
     {path:'actualizar-detalleViaje',component:UpdateTravelDetailComponent},
-    {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},      
+    {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},    
+
+    {path:'users', component:UsersComponent},
+    {path:'user', component:UserComponent},
+    {path: 'ad-viaje', component: AdViajeComponent },
 
     {path:'**',component:ErrorComponent}
 ];

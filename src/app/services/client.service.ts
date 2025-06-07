@@ -19,4 +19,15 @@ export class ClientService {
         }
         return this._http.post(this.url+"Client",params,options)
     }
-}
+    getClient(): Observable<Client[]> {
+        const token = this.getToken();
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        });
+        return this._http.get<Client[]>(`${this.url}Client/all`, { headers });
+      }
+      getToken() {
+    return sessionStorage.getItem('token');
+  }
+} 

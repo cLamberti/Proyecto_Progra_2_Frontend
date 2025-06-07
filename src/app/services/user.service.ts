@@ -7,7 +7,7 @@ import { User } from '../models/user';
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private url: string;
-
+  
   constructor(private _http: HttpClient) {
     this.url = server.url;
   }
@@ -16,7 +16,23 @@ export class UserService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post(`${this.url}login`, user, { headers });
   }
+  getUsers(): Observable<User[]> {
+  const token = this.getToken();
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  });
+  return this._http.get<User[]>(`${this.url}User/all`, { headers });
+}
 
+deleteUser(id: number): Observable<any> {
+  const token = this.getToken();
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  });
+  return this._http.delete(`${this.url}User/delete/${id}`, { headers });
+}
   getIdentity() {
     const identity = sessionStorage.getItem('identity');
     return identity ? JSON.parse(identity) : null;
