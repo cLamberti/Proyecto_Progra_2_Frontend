@@ -1,0 +1,67 @@
+<div class="header">
+  <h1>Gestión Proveedores</h1>
+</div>
+<div class="container">
+  <form class="form-container" #providerForm="ngForm" (ngSubmit)="onSubmit(providerForm)">
+    <div class="form-proveedores left-column">
+      <div class="form-name">
+        <span>Nombre del proveedor</span><br>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-file-contract"></i></span>
+          <input type="text" class="nombre-proveedor form-control" placeholder="Nombre Proveedor" aria-label="nombre-proveedor"
+            aria-describedby="basic-addon1" name="type" [(ngModel)]="provider.nombre" required>
+        </div>
+      </div>
+      <div class="form-description">
+        <span>Agrega una pequeña descripción del proveedor</span><br>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
+          <textarea class="form-control" aria-label="detalles importantes" placeholder="Detalles importantes del proveedor"
+            name="description" [(ngModel)]="provider.descrip" required></textarea>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-success mt-2" [value]="isEditing ? 'Actualizar proveedor' : 'Guardar proveedor'" [disabled]="providerForm.invalid"
+        [routerLink]="'/ad-proveedores'">
+    </div>
+  </form>
+  <table class="tabla-proveedores table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Índice</th>
+        <th scope="col"> Nombre</th>
+        <th scope="col"> Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of providers; index as i">
+        <th scope="row">{{ item.idproveedor }}</th>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.descrip }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- Selector de tipo de búsqueda -->
+<div class= "mb-3">
+  <label for="filterType" class="form-label">Buscar, borrar o modificar por:</label>
+  <div class="select-type">
+    <select id="filterType" class="form-select" [(ngModel)]="filterType">
+      <option value="id">ID</option>
+      <option value="name">Nombre</option>
+    </select>
+  </div>
+</div>
+
+<div class="search-provider">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" [placeholder]="filterType === 'id' ? 'Ingrese el ID del proveedor' : 'Ingrese el nombre del proveedor'" [(ngModel)]="searchValue"
+      name="searchValue" aria-label="Example text with two button addons"> 
+
+    <button class="btn btn-outline-primary" type="button" (click)="search()">Buscar</button>
+    <button class="btn btn-outline-secondary" type="button" (click)="updateProvider()">modificar</button>
+    <button class="btn btn-outline-danger" type="button" (click)="deleteProvider()">eliminar</button>
+    <button class="btn btn-outline-warning" type="button" *ngIf="showSingleProvider" (click)="clearSearch()">Limpiar
+      búsqueda</button>
+  </div>
+</div>

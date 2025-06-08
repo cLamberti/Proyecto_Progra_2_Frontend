@@ -1,0 +1,29 @@
+.header {
+  text-align: center;
+}
+
+.left-column {
+  width: 95%;
+  padding: 10px;
+}
+
+.form-container {
+  width: 60%;
+}
+
+.tabla-proveedores {
+  width: 60%;
+}
+
+.container {
+  display: flex;
+}
+
+.search-provider {
+  width: 45%;
+}
+
+.select-type {
+  width: auto;
+  max-width: 10%;
+}
