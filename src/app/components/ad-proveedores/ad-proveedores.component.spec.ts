@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteProviderComponent } from './delete-provider.component';
+import { AdProveedoresComponent } from './ad-proveedores.component';
 
-describe('DeleteProviderComponent', () => {
-  let component: DeleteProviderComponent;
-  let fixture: ComponentFixture<DeleteProviderComponent>;
+describe('AdProveedoresComponent', () => {
+  let component: AdProveedoresComponent;
+  let fixture: ComponentFixture<AdProveedoresComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteProviderComponent]
+      imports: [AdProveedoresComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeleteProviderComponent);
+    fixture = TestBed.createComponent(AdProveedoresComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

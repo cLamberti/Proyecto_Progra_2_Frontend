@@ -36,14 +36,14 @@
       </select>
     </div>
 
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label>Viaje</label>
-      <select class="form-control" name="idViaje" [(ngModel)]="travelDetail.idViaje" required>
-        @for (v of viajes; track v.idViaje) {
+      <select class="form-control" name="idViaje" [(ngModel)]="travelDetail.id" required>
+        @for (v of travels; track v.idViaje) {
           <option [ngValue]="v.idViaje">{{ v.tipoViaje }}</option>
         }
       </select>
-    </div> -->
+    </div>
 
     <div>
       <input type="submit" class="btn btn-primary mt-3" value="Guardar">

@@ -30,11 +30,11 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ travelDetail.idDetalleViaje }}</td>
+          <td>{{ travelDetail.idDetalle }}</td>
           <td>{{ travelDetail.fecha | date: 'yyyy-MM-dd' }}</td>
           <td>{{ travelDetail.hora | date: 'HH:mm' }}</td>
           <td>{{ getProviderName(travelDetail.idproveedor) }}</td>
-          <td>{{ getTipoViaje(travelDetail.idViaje) }}</td>
+          <td>{{ getTipoViaje(travelDetail.id) }}</td>
         </tr>
       </tbody>
     </table>

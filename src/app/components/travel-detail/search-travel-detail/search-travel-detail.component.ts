@@ -16,13 +16,14 @@ export class SearchTravelDetailComponent{
   public providers: any[] = [];
   searchId: number = 0;
   travelDetail: TravelDetail | null = null;
+  private token:any
 
   constructor(
     private travelDetailService: TravelDetailService,
   ) {}
 
   search() {
-    this.travelDetailService.getDetailsByID(this.searchId).subscribe({
+    this.travelDetailService.getDetailsByID(this.searchId,this.token).subscribe({
       next: (data) => {
         console.log(data)
         this.travelDetail = data;
@@ -42,8 +43,8 @@ export class SearchTravelDetailComponent{
     return proveedor ? proveedor.nombre : 'Proveedor desconocido';
   }
 
-  getTipoViaje(idViaje: number): string {
-    const viaje = this.travels.find(v => v.idViaje === idViaje);
-    return viaje ? viaje.tipoViaje : 'Viaje desconocido';
+  getTipoViaje(id: number): string {
+    const viaje = this.travels.find(v => v.id === id);
+    return viaje ? viaje.id : 'Viaje desconocido';
   }
 }

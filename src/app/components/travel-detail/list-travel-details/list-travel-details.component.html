@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (td of travelDetails; track td.idDetalleViaje) {
+      @for (td of travelDetails; track td.idDetalle) {
         <tr>
           <td>{{ td.fecha | date: 'yyyy-MM-dd' }}</td>
           <td>{{ td.hora | date: 'HH:mm' }}</td>

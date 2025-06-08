@@ -26,7 +26,7 @@ export class ListTravelDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.userService.getToken();
     if (this.token) {
-      this.travelDetailService.getAllDetails().subscribe({
+      this.travelDetailService.getAllDetails(this.token).subscribe({
         next: (response) => {
           console.log(response)
           this.travelDetails = response;
@@ -40,15 +40,15 @@ export class ListTravelDetailsComponent implements OnInit {
     }
   }
 
-  getProviderName(idProveedor: number | null): string {
-    if (idProveedor === null) return 'Sin proveedor';
-    const proveedor = this.providers.find(p => p.idProveedor === idProveedor);
+  getProviderName(idproveedor: number | null): string {
+    if (idproveedor === null) return 'Sin proveedor';
+    const proveedor = this.providers.find(p => p.idproveedor === idproveedor);
     return proveedor ? proveedor.nombre : 'Proveedor desconocido';
   }
 
-  getTipoViaje(idViaje: number): string {
-    const viaje = this.travels.find(v => v.idViaje === idViaje);
-    return viaje ? viaje.tipoViaje : 'Viaje desconocido';
+  getTipoViaje(id: number): string {
+    const viaje = this.travels.find(v => v.id === id);
+    return viaje ? viaje.tipoviaje : 'Viaje desconocido';
   }
 
 }

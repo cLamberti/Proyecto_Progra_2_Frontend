@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { TravelDetail } from '../../../models/travelDetail';
 import { TravelDetailService } from '../../../services/travelDetail.service';
 import { UserService } from '../../../services/user.service';
-//import { TravelService } from '../../../services/travel.service';
+import { TravelService } from '../../../services/travel.service';
 import { ProviderService } from '../../../services/provider.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class UpdateTravelDetailComponent implements OnInit{
   constructor(
     private travelDetailService: TravelDetailService,
     private userService: UserService,
-    //private travelService: TravelService,
+    private travelService: TravelService,
     private providerService: ProviderService
   ) {
     this.travelDetail = new TravelDetail(0,'', '', 0, 0);
@@ -31,15 +31,15 @@ export class UpdateTravelDetailComponent implements OnInit{
   ngOnInit(): void {
     this.token = this.userService.getToken();
     if (this.token) {
-      // this.travelService.GetAllTravels().subscribe({
-      //   next: (response:any) => {
-      //     console.log(response)
-      //     this.travels = response;
-      //   },
-      //   error: (err:Error) => {
-      //     console.error(err);
-      //   }
-      // });
+      this.travelService.getTravels(this.token).subscribe({
+        next: (response:any) => {
+          console.log(response)
+          this.travels = response;
+        },
+        error: (err:Error) => {
+          console.error(err);
+        }
+      });
 
       this.providerService.GetAllProviders(this.token).subscribe({
         next: (response:any) => {
@@ -60,7 +60,7 @@ export class UpdateTravelDetailComponent implements OnInit{
       return;
     }
 
-    this.travelDetailService.UpdateDetail(this.travelDetail.idDetalleViaje, this.travelDetail, this.token).subscribe({
+    this.travelDetailService.UpdateDetail(this.travelDetail.idDetalle, this.travelDetail, this.token).subscribe({
       next:(response:any)=>{
         console.log(response)
         this.status = 0 // Éxito
