@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user-admin',
-  imports: [FormsModule, RouterLink, RouterOutlet],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register-user-admin.component.html',
   styleUrl: './register-user-admin.component.css'
 })

@@ -6,7 +6,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { RegisterUserClientComponent } from './components/register/register-user-client/register-user-client.component';
 import { RegisterAdminComponent } from './components/register/register-admin/register-admin.component';
 import { RegisterUserAdminComponent } from './components/register/register-user-admin/register-user-admin.component';
-import { UserComponent } from './components/gestionUsuarios/user/user.component';
+import { UserProfileComponent } from './components/gestionUsuarios/user-profile/user-profile.component';
 import { UsersComponent } from './components/gestionUsuarios/users/users.component';
 import { AdViajeComponent } from './components/ad-viaje/ad-viaje.component';
 import { User } from './models/user';
@@ -19,7 +19,7 @@ export const routes: Routes = [
     {path:'register-admin', component:RegisterAdminComponent},
     {path:'register-user-admin', component:RegisterUserAdminComponent},
     {path:'users', component:UsersComponent},
-    {path:'user', component:UserComponent},
+    {path:'user-profile', component:UserProfileComponent},
     {path: 'ad-viaje', component: AdViajeComponent },   
     
     {path:'**',component:ErrorComponent}

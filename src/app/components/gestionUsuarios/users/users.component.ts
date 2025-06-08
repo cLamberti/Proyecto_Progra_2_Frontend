@@ -21,7 +21,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     HttpClientModule,
     CommonModule,
     RouterLink,
-    RouterOutlet
   ]
 })
 export class UsersComponent implements OnInit {
@@ -141,7 +140,6 @@ allSelected(): boolean {
 
 toggleSelectAll(): void {
   if (this.isAllSelected()) {
-    // Deseleccionar todos
     this.filteredUsers.forEach(user => {
       const index = this.selectedUserIds.indexOf(user.idUsuario);
       if (index > -1) {
@@ -149,7 +147,6 @@ toggleSelectAll(): void {
       }
     });
   } else {
-    // Seleccionar todos
     this.filteredUsers.forEach(user => {
       if (!this.selectedUserIds.includes(user.idUsuario)) {
         this.selectedUserIds.push(user.idUsuario);

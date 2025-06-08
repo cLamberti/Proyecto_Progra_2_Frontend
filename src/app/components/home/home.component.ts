@@ -4,7 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet,RouterLink],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
