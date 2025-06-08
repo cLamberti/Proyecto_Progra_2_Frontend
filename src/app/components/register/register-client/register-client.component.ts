@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-client',
-  imports: [FormsModule, RouterLink, RouterOutlet],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register-client.component.html',
   styleUrl: './register-client.component.css'
 })

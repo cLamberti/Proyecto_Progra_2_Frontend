@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-admin',
-  imports: [FormsModule, RouterLink, RouterOutlet],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register-admin.component.html',
   styleUrl: './register-admin.component.css'
 })
