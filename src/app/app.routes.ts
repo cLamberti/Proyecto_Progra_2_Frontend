@@ -9,7 +9,12 @@ import { RegisterUserAdminComponent } from './components/register/register-user-
 import { UserProfileComponent } from './components/gestionUsuarios/user-profile/user-profile.component';
 import { UsersComponent } from './components/gestionUsuarios/users/users.component';
 import { AdViajeComponent } from './components/ad-viaje/ad-viaje.component';
-import { User } from './models/user';
+import { NewTravelDetailComponent } from './components/travel-detail/new-travel-detail/new-travel-detail.component';
+import { ListTravelDetailsComponent } from './components/travel-detail/list-travel-details/list-travel-details.component';
+import { SearchTravelDetailComponent } from './components/travel-detail/search-travel-detail/search-travel-detail.component';
+import { UpdateTravelDetailComponent } from './components/travel-detail/update-travel-detail/update-travel-detail.component';
+import { DeleteTravelDetailComponent } from './components/travel-detail/delete-travel-detail/delete-travel-detail.component';
+import { AdProveedoresComponent } from './components/ad-proveedores/ad-proveedores.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -20,7 +25,14 @@ export const routes: Routes = [
     {path:'register-user-admin', component:RegisterUserAdminComponent},
     {path:'users', component:UsersComponent},
     {path:'user-profile', component:UserProfileComponent},
-    {path: 'ad-viaje', component: AdViajeComponent },   
+    {path: 'ad-viaje', component: AdViajeComponent }, 
+    {path:'crear-detalleViaje',component:NewTravelDetailComponent},
+    {path:'listar-detalleViaje',component:ListTravelDetailsComponent},    
+    {path:'buscar-detalleViaje',component:SearchTravelDetailComponent},
+    {path:'actualizar-detalleViaje',component:UpdateTravelDetailComponent},
+    {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},  
+    {path: 'ad-proveedores', component: AdProveedoresComponent },  
+  
     
     {path:'**',component:ErrorComponent}
 ];
