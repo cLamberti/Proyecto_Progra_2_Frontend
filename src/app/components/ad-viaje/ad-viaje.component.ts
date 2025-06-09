@@ -1,8 +1,8 @@
+import { Travel } from './../../models/travel';
 import { UserService } from './../../services/user.service';
 import { TravelService } from './../../services/travel.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Travel } from '../../models/travel';
 import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -81,6 +81,7 @@ export class AdViajeComponent {
     this.travelService.getTravelById(id, this.token).subscribe({
       next: (response) => {
         console.log(response)
+        this.travel = response
         this.travels = [response]
         this.showSingleTravel = true
         if (this.checkTravels) {
@@ -89,6 +90,25 @@ export class AdViajeComponent {
         }
       },
       error: (err: Error) => {
+        console.log(err)
+        this.travels = []
+        this.showSingleTravel = false
+      }
+    })
+  }
+
+  public updateTravel(id:number) {
+    this.token = this.userService.getToken()
+    this.travelService.updateTravel(id, this.travel, this.token).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.showSingleTravel = true
+        if (this.checkTravels) {
+          clearInterval(this.checkTravels)
+          this.checkTravels = null
+        }
+      },
+      error: (err:Error) => {
         console.log(err)
         this.travels = []
         this.showSingleTravel = false
