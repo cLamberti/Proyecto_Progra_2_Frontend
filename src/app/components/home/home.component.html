@@ -1,147 +1,186 @@
-<div class="container shadow p-0">
-  <!-- Left Column -->
-  <div class="left-column">
-    <img src="surf.jpg" alt="Surf Wishes Rock">
-    <div class="label">Surf wishes rock</div>
+<div class="container-wrapper">
+  <div class="container shadow">
+    <!-- Left Column -->
+    <div class="left-column">
+      <div class="gallery-item">
+        <img src="surf.jpg" alt="Surf Wishes Rock" class="gallery-img">
+        <div class="label">Surf wishes rock</div>
+      </div>
 
-    <img src="water.jpg" alt="Water Text">
-    <div class="label">Water taxi</div>
+      <div class="gallery-item">
+        <img src="water.jpg" alt="Water Text" class="gallery-img">
+        <div class="label">Water taxi</div>
+      </div>
 
-    <img src="jet.jpg" alt="Jet Ski">
-    <div class="label">Jet ski</div>
+      <div class="gallery-item">
+        <img src="jet.jpg" alt="Jet Ski" class="gallery-img">
+        <div class="label">Jet ski</div>
+      </div>
 
-    <img src="sunset.jpg" alt="Sunset Tour">
-    <div class="label">sunset tour</div>
+      <div class="gallery-item">
+        <img src="sunset.jpg" alt="Sunset Tour" class="gallery-img">
+        <div class="label">sunset tour</div>
+      </div>
 
-    <img src="snorkeling.jpg" alt="Snorkeling">
-    <div class="label">Snorkeling</div>
+      <div class="gallery-item">
+        <img src="snorkeling.jpg" alt="Snorkeling" class="gallery-img">
+        <div class="label">Snorkeling</div>
+      </div>
 
-    <img src="bay.jpg" alt="Bay Tour">
-    <img src="bay1.jpg" alt="Bay Tour">
-    <div class="label">Bay tour</div>
+      <div class="gallery-item">
+        <img src="bay.jpg" alt="Bay Tour" class="gallery-img">
+        <img src="bay1.jpg" alt="Bay Tour" class="gallery-img">
+        <div class="label">Bay tour</div>
+      </div>
 
-    <img src="catamaran.jpg" alt="Catamaran">
-    <img src="catamaran1.jpg" alt="Catamaran">
-    <div class="label">Catamaran</div>
-  </div>
-
-  <!-- Center Column -->
-  <div class="center-column">
-    <h2>COCO'S TOUR OWNER</h2>
-    <p>
-      Cocos Tours nace del sueño de Eliecer Dávila, una persona apasionada por el mar y las aventuras.
-      Conoce cada sendero, cada ola y cada historia que hace de Guanacaste un lugar especial. Su mayor alegría
-      es ver a cada viajero irse con el corazón lleno de pura vida.
-    </p>
-    <p>
-      Cocos Tours was born from the dream of Eliecer Dávila, a person passionate about the sea and adventures.
-      He knows every trail, every wave and every story that makes Guanacaste a special place. His greatest joy
-      is to see every traveler leave with a heart full of "pura vida".
-    </p>
-    <div style="align-items: center; text-align: center;">
-      @if (!identity){
-        <a class="btn btn-primary mt-2 text-center" [routerLink]="['/register-client']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
-      } @else {
-        <a class="btn btn-primary mt-2 text-center" [routerLink]="['/req-travel']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
-      }
+      <div class="gallery-item">
+        <img src="catamaran.jpg" alt="Catamaran" class="gallery-img">
+        <img src="catamaran1.jpg" alt="Catamaran" class="gallery-img">
+        <div class="label">Catamaran</div>
+      </div>
     </div>
-    <h3 style="padding-top: 10px; text-align: center;">Eliecer Dávila | The Owner</h3>
-    <img src="owner.jpg" alt="Owner">
-    <h3 style="padding-top: 10px; text-align: center;">Types os adventures | tipos de aventuras</h3>
-    <div id="fullday">
-    <img src="fullday1.jpg" alt="full day1">
-    <br>
-    <div class="label">Full day - 8 hours</div>
-    <div id="include">
-        <p><strong>
-            INCLUYE: SNACKS <br>
-            GUACAMOLE
-            SANDWICH
-            AGUAS
-            FRUTAS
-            REFRESCOS
-            SODAS
-            CERVEZA
-    </strong></p>
-    <p style="padding-left: 4px;"><strong>
-        INCLUDES: SNACKS <br>   
-            GUACAMOLE
-            SANDWICH    
-            WATER
-            FRUITS
-            SOFT DRINKS
-            SODAS
-            BEERS
-    </strong></p>
-    </div>
-    <p style="text-align: center;">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
-    </div>
-    <div id="halfday">
-    <img src="halfday.jpg" alt="half day">
-    <br>
-    <div class="label">Half Day - 4 hours</div>
-    <div id="include">
-        <p><strong>
-            INCLUYE: SNACKS <br>
-            AGUAS, FRUTAS Y CERVEZAS
-    </strong></p>
-    <p style="padding-left: 4px;"><strong>
-        INCLUDES: SNACKS <br>   
-            WATER, FRUITS AND BEERS
-    </strong></p>
-    </div>
-    <p style="text-align: center;">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
-    </div>
-    <div id="3/4">
-        <img src="3-4.jpg" alt="3/4">
-        <br>
-        <div class="label">3/4 - 6 hours</div>
-        <div id="include">
-        <p><strong>
-            INCLUYE: SNACKS <br>
-            AGUAS, FRUTAS Y CERVEZAS
-        </strong></p>
-        <p style="padding-left: 4px;"><strong>
-            INCLUDES: SNACKS <br>   
-            WATER, FRUITS AND BEERS
-        </strong></p>
+
+    <!-- Center Column -->
+    <div class="center-column">
+      <h2 class="section-title">COCO'S TOUR OWNER</h2>
+      <div class="text-content">
+        <p>
+          Cocos Tours nace del sueño de Eliecer Dávila, una persona apasionada por el mar y las aventuras.
+          Conoce cada sendero, cada ola y cada historia que hace de Guanacaste un lugar especial. Su mayor alegría
+          es ver a cada viajero irse con el corazón lleno de pura vida.
+        </p>
+        <p>
+          Cocos Tours was born from the dream of Eliecer Dávila, a person passionate about the sea and adventures.
+          He knows every trail, every wave and every story that makes Guanacaste a special place. His greatest joy
+          is to see every traveler leave with a heart full of "pura vida".
+        </p>
+      </div>
+      
+      <div class="cta-container">
+        @if (!identity){
+          <a class="btn btn-cta" [routerLink]="['/register-client']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
+        } @else {
+          <a class="btn btn-cta" [routerLink]="['/req-travel']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
+        }
+      </div>
+      
+      <h3 class="section-subtitle">Eliecer Dávila | The Owner</h3>
+      <img src="owner.jpg" alt="Owner" class="main-img">
+      
+      <h3 class="section-subtitle">Types of adventures | tipos de aventuras</h3>
+      
+      <div class="adventure-card" id="fullday">
+        <img src="fullday1.jpg" alt="full day1" class="adventure-img">
+        <div class="label adventure-label">Full day - 8 hours</div>
+        <div class="includes-container">
+          <div class="includes-content">
+            <p class="includes-title">INCLUYE:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">GUACAMOLE</p>
+            <p class="includes-item">SANDWICH</p>
+            <p class="includes-item">AGUAS</p>
+            <p class="includes-item">FRUTAS</p>
+            <p class="includes-item">REFRESCOS</p>
+            <p class="includes-item">SODAS</p>
+            <p class="includes-item">CERVEZA</p>
+          </div>
+          <div class="includes-content">
+            <p class="includes-title">INCLUDES:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">GUACAMOLE</p>
+            <p class="includes-item">SANDWICH</p>
+            <p class="includes-item">WATER</p>
+            <p class="includes-item">FRUITS</p>
+            <p class="includes-item">SOFT DRINKS</p>
+            <p class="includes-item">SODAS</p>
+            <p class="includes-item">BEERS</p>
+          </div>
         </div>
-        <p style="text-align: center;">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
+        <p class="adventure-note">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
+      </div>
+      
+      <div class="adventure-card" id="halfday">
+        <img src="halfday.jpg" alt="half day" class="adventure-img">
+        <div class="label adventure-label">Half Day - 4 hours</div>
+        <div class="includes-container">
+          <div class="includes-content">
+            <p class="includes-title">INCLUYE:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">AGUAS, FRUTAS Y CERVEZAS</p>
+          </div>
+          <div class="includes-content">
+            <p class="includes-title">INCLUDES:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">WATER, FRUITS AND BEERS</p>
+          </div>
+        </div>
+        <p class="adventure-note">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
+      </div>
+      
+      <div class="adventure-card" id="3/4">
+        <img src="3-4.jpg" alt="3/4" class="adventure-img">
+        <div class="label adventure-label">3/4 - 6 hours</div>
+        <div class="includes-container">
+          <div class="includes-content">
+            <p class="includes-title">INCLUYE:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">AGUAS, FRUTAS Y CERVEZAS</p>
+          </div>
+          <div class="includes-content">
+            <p class="includes-title">INCLUDES:</p>
+            <p class="includes-item">SNACKS</p>
+            <p class="includes-item">WATER, FRUITS AND BEERS</p>
+          </div>
+        </div>
+        <p class="adventure-note">You can add something more with an extra <br> 1 a 5 personas | 1 to 5 persons</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Right Column -->
-  <div class="right-column">
-    <img id="logo-right" src="logo.png" alt="Logo">
-    <div class="quote">
-      <strong>"Cada tour con Coco’s Tours es una historia contada por el mar, el sol y la tierra caliente de Guanacaste...<br>
-      y vos sos el protagonista."</strong> 
+    <!-- Right Column -->
+    <div class="right-column">
+      <div class="logo-container">
+        <img id="logo-right" src="logo.png" alt="Logo">
+      </div>
+      
+      <div class="quote-container">
+        <div class="quote">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p>"Cada tour con Coco's Tours es una historia contada por el mar, el sol y la tierra caliente de Guanacaste... y vos sos el protagonista."</p>
+          <i class="fas fa-quote-right quote-icon"></i>
+        </div>
+        <div class="quote">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p>"Every tour with Coco's Tours is a story told by the sea, the sun, and the warm land of Guanacaste... and you're the main character."</p>
+          <i class="fas fa-quote-right quote-icon"></i>
+        </div>
+      </div>
+      
+      <div class="contact-section">
+        <div class="contact-title">Contact Us</div>
+        <div class="contact-info">
+          <p><i class="fas fa-envelope contact-icon"></i>capitanmacho&#64;gmail.com</p>
+          <p><i class="fas fa-phone contact-icon"></i>+506 8594 8851</p>
+          <p><i class="fas fa-map-marker-alt contact-icon"></i>Playas del coco, Costa Rica</p>
+        </div>
+      </div>
+      
+      <div class="reasons-section">
+        <h4 class="reasons-title">Reasons Why You Should Use Our Travel</h4>
+        <h6 class="reasons-subtitle">¿Por que viajar con nosotros?</h6>
+        
+        <div class="reasons-grid">
+          <div class="label reason-item">We're locals. <br>Somos locales.</div>
+          <div class="label reason-item">Warm service. <br>Trato cercano.</div>
+          <div class="label reason-item">Real experiences. <br>Experiencias reales.</div>
+          <div class="label reason-item">Safe and reliable. <br>Seguridad y confianza.</div>
+          <div class="label reason-item">Purposeful tourism. <br>Turismo con propósito.</div>
+        </div>
+      </div>
+      
+      <div class="right-gallery">
+        <img src="img.jpg" alt="image" class="right-img">
+        <img src="img1.jpg" alt="image" class="right-img">
+      </div>
     </div>
-    <div class="quote">
-      <strong>"Every tour with Coco’s Tours is a story told by the sea, the sun, and the warm land of Guanacaste...<br>
-      and you’re the main character."</strong>
-    </div>
-
-    <div class="contact-title">Contact Us</div>
-    <div class="contact-info">
-      <p><i class="fas fa-envelope"></i>capitanmacho&#64;gmail.com</p>
-      <p><i class="fas fa-phone"></i>+506 8594 8851</p>
-      <p><i class="fas fa-map-marker-alt"></i>Playas del coco, Costa Rica</p>
-    </div>
-    <div>
-        <h4><strong>
-            Reasons Why You Should Use Our Travel
-        </strong></h4>
-        <h6><strong>
-            ¿Por que viajar con nosotros? <br><br>
-        </strong></h6>
-        <div class="label">We’re locals. <br>Somos locales.</div>
-        <div class="label">Warm service. <br>Trato cercano.</div>
-        <div class="label">Real experiences. <br>Experiencias reales.</div>
-        <div class="label">Safe and reliable. <br>Seguridad y confianza.</div>
-        <div class="label">Purposeful tourism. <br>Turismo con propósito.</div> <br>
-    </div>
-      <img src="img.jpg" alt="image">
-      <img src="img1.jpg" alt="image">
   </div>
 </div>

@@ -71,3 +71,54 @@
     </nav>
     <router-outlet/>
 </div>
+<footer class="footer container">
+  <div class="footer-container">
+    <div class="footer-section">
+      <img src="logo.png" alt="Coco's Tours Logo" class="footer-logo">
+      <p class="footer-description">
+        Cocos Tours - Experiencias únicas en las playas de Guanacaste. 
+        "Pura Vida" no es solo un lema, es nuestro estilo de vida.
+      </p>
+      <div class="social-icons">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3 class="footer-title">Explorar</h3>
+      <ul class="footer-links">
+        <li><a [routerLink]="['/']"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+        <li><a [routerLink]="['/viaje']"><i class="fas fa-chevron-right"></i> Tours</a></li>
+        <li><a [routerLink]="['/register-client']"><i class="fas fa-chevron-right"></i> Registrarse</a></li>
+        <li><a [routerLink]="['/login']"><i class="fas fa-chevron-right"></i> Iniciar Sesión</a></li>
+        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3 class="footer-title">Contacto</h3>
+      <ul class="footer-contact">
+        <li><i class="fas fa-map-marker-alt"></i> Playas del Coco, Guanacaste, Costa Rica</li>
+        <li><i class="fas fa-phone-alt"></i> +506 8594 8851</li>
+        <li><i class="fas fa-envelope"></i> capitanmacho&#64;.com</li>
+        <li><i class="fas fa-clock"></i> Lunes a Domingo: 6:00 AM - 8:00 PM</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3 class="footer-title">Recibe Ofertas</h3>
+      <p class="newsletter-text">Suscríbete para recibir promociones especiales y novedades.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirse <i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">
+      &copy; 2023 Coco's Tours. Todos los derechos reservados. | 
+      <a href="#">Política de Privacidad</a> | 
+      <a href="#">Términos y Condiciones</a>
+    </div>
+  </div>
+</footer>
