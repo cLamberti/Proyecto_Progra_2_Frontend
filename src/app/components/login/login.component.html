@@ -1,18 +1,37 @@
-<div class="col-md-12 mt-4">
-    <div class="col-md-4 mx-auto">
+<div class="container mt-5 d-flex justify-content-center" style="padding-bottom: 5%;">
+  <div class="col-md-5">
+    <div class="card shadow-lg rounded">
+      <div class="card-body">
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-            <h3 class="text-center">Inicion sesión</h3>
-            <div class="form-group">
-                <label>User Name</label>
-                <input type="user" class="form-control" name="user" #email="ngModel" [(ngModel)]="user.user" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="user.password" required>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary mt-3" value="Login">
-            </div>
+          <h3 class="text-center mb-4 fw-bold">Inicio de sesión</h3>
+          <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <input
+              type="text"
+              class="form-control"
+              name="user"
+              [(ngModel)]="user.user"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="user.password"
+              required
+            />
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
+            </button>
+          </div>
         </form>
+      </div>
     </div>
+  </div>
 </div>

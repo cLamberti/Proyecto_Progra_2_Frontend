@@ -24,7 +24,7 @@ export class LoginComponent {
     private _routes: ActivatedRoute
   ) {
     this.status = -1;
-    this.user = new User(0, '', '', '', 0, 0);
+    this.user = new User(0, '', '', '', '', 0, 0);
   }
 
   onSubmit(form: any) {
@@ -38,9 +38,9 @@ export class LoginComponent {
             confirmButtonText:'Ok'
           }).then((result) => {
             if (result.isConfirmed) {
-            sessionStorage.setItem('token', response.access_token);
-            sessionStorage.setItem('identity', JSON.stringify(response.logged_user));
-            sessionStorage.setItem('role', response.role);
+            this._userService.setToken(response)
+            this._userService.setIdentity(response)
+            this._userService.setRole(response)
             this._router.navigate(['']);
             }
             });;

@@ -1,28 +1,94 @@
-<!-- Cambia *ngIf -->
-@if (isLoading) {
-  <tr>
-    <td colspan="4" class="text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-    </td>
-  </tr>
-}
+<div class="container mt-4 user-management-container">
+  <h2 class="text-center mb-4 user-management-title">Gestión de Usuarios</h2>
 
-<!-- Cambia *ngFor -->
-@for (user of filteredUsers; track user.idUsuario) {
-  <tr>
-    <td>{{ user.user }}</td>
-    <td>{{ user.email }}</td>
-    <td>
-      <button class="btn btn-danger btn-sm" 
-              (click)="deleteUser(user.idUsuario, user.user)">
-        <i class="bi bi-trash"></i> Eliminar
+  <div class="search-container mb-4">
+    <input
+      type="text"
+      class="form-control search-input"
+      placeholder="Buscar por nombre, usuario, rol o correo"
+      [(ngModel)]="searchTerm"
+      (input)="search()"
+    />
+    <i class="bi bi-search search-icon"></i>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover user-table">
+      <thead class="table-header">
+        <tr>
+          <th class="checkbox-column">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="isAllSelected()"
+              (change)="toggleSelectAll()"
+            />
+          </th>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Email</th>
+          <th>Rol en el sistema</th>
+          <th class="actions-column">Acción</th>
+        </tr>
+      </thead>  
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers" class="user-row">
+          <td class="checkbox-column">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="selectedUserIds.includes(user.idUsuario)"
+              (change)="toggleSelection(user.idUsuario)"
+            />
+          </td>
+          <td>{{ user.idUsuario }}</td>
+          <td>{{user.name}}</td>
+          <td>{{ user.user }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td class="actions-column">
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.idUsuario)">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <div class="user-actions">
+      <button
+        class="btn btn-outline-danger"
+        (click)="deleteSelectedUsers()"
+        [disabled]="selectedUserIds.length === 0"
+      >
+        <i class="bi bi-trash"></i> Eliminar seleccionados ({{ selectedUserIds.length }})
       </button>
-    </td>
-  </tr>
-} @empty {
-  <tr>
-    <td colspan="4" class="text-center">No se encontraron usuarios</td>
-  </tr>
-}
+      <button [routerLink]="'/register-admin'" class="btn btn-primary ms-3">
+        <i class="bi bi-person-plus"></i> Registrar administrador
+      </button>
+    </div>
+
+    <nav *ngIf="totalPages > 1" class="user-pagination">
+      <button 
+        class="btn btn-outline-primary"
+        (click)="changePage(currentPage - 1)" 
+        [disabled]="currentPage === 1"
+      >
+        <i class="bi bi-chevron-left"></i> Anterior
+      </button>
+      
+      <span class="page-info mx-3">Página {{ currentPage }} de {{ totalPages }}</span>
+      
+      <button 
+        class="btn btn-outline-primary"
+        (click)="changePage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages"
+      >
+        Siguiente <i class="bi bi-chevron-right"></i>
+      </button>
+    </nav>
+  </div>
+</div>
