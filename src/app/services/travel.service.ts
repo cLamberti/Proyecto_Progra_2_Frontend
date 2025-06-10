@@ -43,6 +43,17 @@ export class TravelService {
     return this._http.post(this.url + "Travel", params, options)
   }
 
+  updateTravel(id:number, travel:Travel, token:any): Observable<any> {
+    this.token = "Bearer " + token
+    let params = JSON.stringify(travel)
+    console.log("Objeto actualizado: " + JSON.stringify(travel, null, 2))
+    let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', this.token)
+    let options = {
+      headers
+    }
+    return this._http.patch(this.url + `Travel/update/${id}`, params, options)
+  }
+
   deleteTravel(id: number, token: any): Observable<any> {
     this.token = "Bearer " + token
     const headers = new HttpHeaders().set('Authorization', this.token)
