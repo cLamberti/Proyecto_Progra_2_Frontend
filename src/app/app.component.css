@@ -10,6 +10,59 @@
     max-height: 300px;
     object-fit: cover;
 }
+
+.developers-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 13px;
+  padding-bottom: 2%;
+}
+
+.developers-section p {
+  margin-bottom: 8px;
+  color: #b6d8f5;
+  font-weight: bold;
+}
+
+.developers-names {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+  margin-top: 5px;
+}
+
+.developers-names span {
+  position: relative;
+  padding-left: 15px;
+  opacity: 0.9;
+}
+
+.developers-names span::before {
+  content: "•";
+  color: #b6d8f5; /* Azul claro */
+  position: absolute;
+  left: 5px;
+}
+
+/* Responsive para nombres de desarrolladores */
+@media (max-width: 480px) {
+  .developers-names {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .developers-names span {
+    padding-left: 0;
+  }
+  
+  .developers-names span::before {
+    display: none;
+  }
+}
 #nav {
     width: 10%;
 }
@@ -63,9 +116,8 @@ body {
       padding: 0;
     }
 
-/* Estilos del Footer - Manteniendo tu paleta de colores */
 .footer {
-  background-color: #1d3d75; /* Azul oscuro como en left-column */
+  background-color: #1d3d75; 
   color: white;
   padding: 40px 0 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -119,7 +171,7 @@ body {
 }
 
 .social-icon:hover {
-  background-color: #b6d8f5; /* Azul claro como en center-column */
+  background-color: #b6d8f5;
   color: #1d3d75;
   transform: translateY(-3px);
 }
@@ -138,7 +190,7 @@ body {
   bottom: 0;
   width: 50px;
   height: 2px;
-  background-color: #b6d8f5; /* Azul claro */
+  background-color: #b6d8f5;
 }
 
 .footer-links {
@@ -162,7 +214,7 @@ body {
 }
 
 .footer-links a:hover {
-  color: #b6d8f5; /* Azul claro */
+  color: #b6d8f5;
   padding-left: 5px;
 }
 
@@ -187,7 +239,7 @@ body {
 
 .footer-contact i {
   margin-top: 3px;
-  color: #b6d8f5; /* Azul claro */
+  color: #b6d8f5;
 }
 
 .newsletter-text {
@@ -210,8 +262,8 @@ body {
 }
 
 .newsletter-form button {
-  background-color: #b6d8f5; /* Azul claro */
-  color: #1d3d75; /* Azul oscuro */
+  background-color: #b6d8f5;
+  color: #1d3d75; 
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -247,11 +299,10 @@ body {
 }
 
 .footer-copyright a:hover {
-  color: #b6d8f5; /* Azul claro */
+  color: #b6d8f5; 
   text-decoration: underline;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
