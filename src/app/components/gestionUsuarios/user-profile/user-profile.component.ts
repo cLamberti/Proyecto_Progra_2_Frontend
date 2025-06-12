@@ -113,7 +113,10 @@ updatePassword() {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Sí, eliminar cuenta',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleteUser(this.identity.id).subscribe({
