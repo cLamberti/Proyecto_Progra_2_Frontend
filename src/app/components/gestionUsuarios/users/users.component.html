@@ -31,7 +31,7 @@
           <th>Rol en el sistema</th>
           <th class="actions-column">Acción</th>
         </tr>
-      </thead>  
+      </thead>
       <tbody>
         <tr *ngFor="let user of paginatedUsers" class="user-row">
           <td class="checkbox-column">
@@ -69,22 +69,23 @@
       <button [routerLink]="'/register-admin'" class="btn btn-primary ms-3">
         <i class="bi bi-person-plus"></i> Registrar administrador
       </button>
+      <button [routerLink]="'/telefonos-clientes'" class="btn btn-primary ms-3">Ver contactos</button>
     </div>
 
     <nav *ngIf="totalPages > 1" class="user-pagination">
-      <button 
+      <button
         class="btn btn-outline-primary"
-        (click)="changePage(currentPage - 1)" 
+        (click)="changePage(currentPage - 1)"
         [disabled]="currentPage === 1"
       >
         <i class="bi bi-chevron-left"></i> Anterior
       </button>
-      
+
       <span class="page-info mx-3">Página {{ currentPage }} de {{ totalPages }}</span>
-      
-      <button 
+
+      <button
         class="btn btn-outline-primary"
-        (click)="changePage(currentPage + 1)" 
+        (click)="changePage(currentPage + 1)"
         [disabled]="currentPage === totalPages"
       >
         Siguiente <i class="bi bi-chevron-right"></i>
