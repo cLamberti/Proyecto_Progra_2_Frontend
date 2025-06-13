@@ -1,1 +1,36 @@
-<p>client-phones works!</p>
+<div class="container">
+  <h4>Telefonos del cliente</h4>
+  <div class="table-container">
+    <table class="phones">
+    <thead class="table-header">
+        <tr>
+          <th class="checkbox-column">
+            <input
+              type="checkbox"
+              class="form-check-input"
+            />
+          </th>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let phone of phones" class="phone-row">
+          <td class="checkbox-column">
+            <input
+              type="checkbox"
+              class="form-check-input"
+            />
+          </td>
+          <td>{{ phone.id }}</td>
+          <td>{{ phone.phone}}</td>
+          <td>{{ phone.type }}</td>
+          <td>{{ phone.client.id }}</td>
+          <td class="actions-column">
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

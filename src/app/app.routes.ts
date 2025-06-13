@@ -17,6 +17,7 @@ import { DeleteTravelDetailComponent } from './components/travel-detail/delete-t
 import { AdProveedoresComponent } from './components/ad-proveedores/ad-proveedores.component';
 import { ReservationRequestComponent } from './components/reservation/reservation-request/reservation-request.component';
 import { AdminReservationComponent } from './components/reservation/admin-reservation/admin-reservation.component';
+import { ClientPhonesComponent } from './components/client-phones/client-phones.component';
 
 
 export const routes: Routes = [
@@ -28,15 +29,16 @@ export const routes: Routes = [
     {path:'register-user-admin', component:RegisterUserAdminComponent},
     {path:'users', component:UsersComponent},
     {path:'user-profile', component:UserProfileComponent},
-    {path: 'ad-viaje', component: AdViajeComponent }, 
+    {path: 'ad-viaje', component: AdViajeComponent },
     {path:'reservation',component:NewTravelDetailComponent},
-    {path:'listar-detalleViaje',component:ListTravelDetailsComponent},    
+    {path:'listar-detalleViaje',component:ListTravelDetailsComponent},
     {path:'buscar-detalleViaje',component:SearchTravelDetailComponent},
     {path:'actualizar-detalleViaje',component:UpdateTravelDetailComponent},
-    {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},  
-    {path: 'ad-proveedores', component: AdProveedoresComponent },  
+    {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},
+    {path: 'ad-proveedores', component: AdProveedoresComponent },
     {path: 'reservation-request', component:ReservationRequestComponent},
     {path: 'admin-reservation', component:AdminReservationComponent},
+    {path: 'client-phones', component: ClientPhonesComponent},
 
     {path:'**',component:ErrorComponent}
 ];
