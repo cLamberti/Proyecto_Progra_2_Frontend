@@ -55,15 +55,13 @@
           is to see every traveler leave with a heart full of "pura vida".
         </p>
       </div>
-      
       <div class="cta-container">
         @if (!identity){
           <a class="btn btn-cta" [routerLink]="['/register-client']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
         } @else {
-          <a class="btn btn-cta" [routerLink]="['/req-travel']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
+          <a class="btn btn-cta" [routerLink]="['/client-reservation']"><i class="fa-solid fa-earth-americas"></i> Enjoy your adventure with us now!</a>
         }
       </div>
-      
       <h3 class="section-subtitle">Eliecer Dávila | The Owner</h3>
       <img src="owner.jpg" alt="Owner" class="main-img">
       

@@ -1,4 +1,4 @@
-/* Base Styles */
+/* colores principales */
 :root {
   --primary-blue: #1d3d75;
   --light-blue: #b6d8f5;
@@ -20,7 +20,6 @@ body {
   padding: 20px;
 }
 
-/* Container Layout */
 .container {
   display: flex;
   margin: 0 auto;
@@ -31,7 +30,6 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Columns */
 .left-column {
   background-color: #1d3d75;
   color: #ffffff;
@@ -60,7 +58,6 @@ body {
   gap: 25px;
 }
 
-/* Gallery Items */
 .gallery-item {
   display: flex;
   flex-direction: column;
@@ -79,7 +76,6 @@ body {
   transform: scale(1.02);
 }
 
-/* Labels */
 .label {
   background-color: #ffffff;
   color: #000000;
@@ -101,7 +97,6 @@ body {
   padding: 10px;
 }
 
-/* Center Column Styles */
 .section-title {
   color: #1d3d75;
   text-align: center;
@@ -144,7 +139,6 @@ body {
   margin: 0 auto;
 }
 
-/* Adventure Cards */
 .adventure-card {
   background-color: #ffffff;
   border-radius: 8px;
@@ -190,7 +184,6 @@ body {
   margin-top: 10px;
 }
 
-/* CTA Button */
 .btn-cta {
   display: inline-block;
   background-color: #1d3d75;
@@ -213,7 +206,6 @@ body {
   box-shadow: 0 5px 15px rgba(29, 61, 117, 0.3);
 }
 
-/* Right Column Styles */
 .logo-container {
   text-align: center;
   margin-bottom: 20px;
@@ -250,7 +242,6 @@ body {
   padding: 0 15px;
 }
 
-/* Contact Section */
 .contact-section {
   background-color: #ffffff;
   padding: 15px;
@@ -299,7 +290,6 @@ body {
   text-align: center;
 }
 
-/* Reasons Section */
 .reasons-section {
   background-color: #ffffff;
   padding: 15px;
@@ -325,7 +315,6 @@ body {
   gap: 10px;
 }
 
-/* Right Gallery */
 .right-gallery {
   display: flex;
   flex-direction: column;
@@ -339,7 +328,7 @@ body {
   border-radius: 5px;
 }
 
-/* Responsive Design */
+
 @media (max-width: 992px) {
   .container {
     flex-direction: column;

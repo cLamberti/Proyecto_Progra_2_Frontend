@@ -6,6 +6,8 @@ import { UserService } from '../../../services/user.service';
 import { TravelService } from '../../../services/travel.service';
 import { ProviderService } from '../../../services/provider.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-travel-detail',
@@ -24,7 +26,8 @@ export class NewTravelDetailComponent implements OnInit{
     private travelDetailService: TravelDetailService,
     private userService: UserService,
     private travelService: TravelService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private route:Router
   ) {
     this.travelDetail = new TravelDetail(1,'', '', 0, 0);
   }
@@ -58,19 +61,46 @@ export class NewTravelDetailComponent implements OnInit{
     if (!this.token) {
       console.log('Error: Token no disponible')
       this.status = 2 // Error de autorización
+      Swal.fire({
+        title: 'Error',
+        text: 'Error: Token no disponible',
+        icon: 'error',
+        confirmButtonText: 'Volver',
+      }).then((result) => {
+      if (result.isConfirmed) {
+        this.route.navigate(['reservation'])
+      }
+    });
       return;
     }
-
-    this.travelDetailService.CreateDetail(this.travelDetail, this.token).subscribe({
+    else{
+      this.travelDetailService.CreateDetail(this.travelDetail, this.token).subscribe({
       next:(response:any)=>{
         console.log(response)
         this.status = 0 // Éxito
         form.reset()
+        Swal.fire({
+          title: 'Exito',
+          text: 'Exito, Reserva exitosa',
+          icon: 'success',
+          confirmButtonText: 'Siguiente',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+          showCancelButton: false,
+          focusConfirm: true
+        }).then((response => {
+          if (response.isConfirmed){
+            this.route.navigate(['/reservation-pasajeros'])
+          }
+        }));
       },
       error:(err:Error)=>{
         console.log(err)
         this.status = 2 // Error de servidor
+        Swal.fire('Error', 'Error del servidor, volver a intentar', 'error')
       }
     });
+    }
   }
 }

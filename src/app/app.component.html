@@ -26,13 +26,16 @@
               <a class="nav-link" [routerLink]="['/ad-proveedores']"><i class="fa-solid fa-user-tie"></i> Gestion Proveedores</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/users']"><i class="fa-solid fa-user"></i> Gestion Usuarios</a>
+              <a class="nav-link" [routerLink]="['/users']"><i class="fa-solid fa-user"></i> Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/reservation']"><i class="fa-solid fa-receipt"></i> Reservas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" (click)="logOutConfirmado()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a>
             </li>
-            <ul class="navbar-nav ms-xl-5" style="padding: 0px 0px;">
-              <li class="nav-item" style="padding: 0px 0px; margin-left: 5%;">
+            <ul class="navbar-nav ms-auto" style="padding: 0px 0px;">
+              <li class="nav-item" style="padding: 0px 0px; margin-left: 1%;">
               <a class="nav-link" [routerLink]="['/user-profile']" style="padding: 0px 0px 0px 0px; margin-left: 30%;">
               <i class="fa-solid fa-circle-user"></i>
               <h6 style="font-size: small;">{{identity.user}}</h6>
@@ -45,9 +48,12 @@
               <a class="nav-link" [routerLink]="['/viaje']"><i class="fa-solid fa-map-location-dot"></i>Viajes</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/reservation']"><i class="fa-solid fa-receipt"></i> Reserva</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" (click)="logOutConfirmado()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a>
             </li>
-            <ul class="navbar-nav ms-xl-5" style="padding: 0px 0px;">
+            <ul class="navbar-nav ms-auto" style="padding: 0px 0px 0px 0px;">
               <li class="nav-item" style="padding: 0px 0px;">
               <a class="nav-link" [routerLink]="['/user-profile']" style="width: 10%; padding: 0px 0px 0px 0px; margin-left: 450px;">
               <i class="fa-solid fa-circle-user"></i>
@@ -112,6 +118,15 @@
         <input type="email" placeholder="Tu correo electrónico" required>
         <button type="submit">Suscribirse <i class="fas fa-paper-plane"></i></button>
       </form>
+    </div>
+  </div>
+  <div class="developers-section">
+    <p>Desarrollado por:</p>
+    <div class="developers-names">
+      <span>Christopher Lamberti Chavarria</span>
+      <span>Nahomy</span>
+      <span>Dereck Monge</span>
+      <span>Anthony Piña</span>
     </div>
   </div>
   <div class="footer-bottom">
