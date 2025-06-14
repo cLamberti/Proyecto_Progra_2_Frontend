@@ -44,11 +44,6 @@ export class RegisterUserClientComponent {
         console.log(response)
         if (response.generated_id) {
           Swal.fire({
-            title: 'Exito',
-            text: 'Registro de usuario exitoso ya puede iniciar sesión',
-            icon: 'success',
-            confirmButtonText: 'Iniciar sesión'
-          }).then((result: any) => {
             if (result.isConfirmed) {
               this.router.navigate(['/login']);
             }

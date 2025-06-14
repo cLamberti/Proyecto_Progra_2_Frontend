@@ -70,13 +70,16 @@ isAllSelected(): boolean {
   loadUsers(): void {
   this.clientService.getClient().subscribe(
     (clientsData) => {
+      if (!clientsData) clientsData = []; // ← Asegura que no sea null
       this.clients = clientsData.map((c: any) => ({
         idClient: c.idcliente,
-        name: c.nombre
+        name: c.nombre,
+        telefono: c.telefono
       }));
 
       this.adminService.getAdmin().subscribe(
         (adminsData) => {
+          if (!adminsData) adminsData = []; // ← Asegura que no sea null
           this.admins = adminsData.map((a: any) => ({
             idAdmin: a.idadministrador,
             name: a.nombre
@@ -84,9 +87,9 @@ isAllSelected(): boolean {
 
           this.userService.getUsers().subscribe(
             (usersData) => {
+              if (!usersData) usersData = []; // ← Asegura que no sea null
               const mappedUsers = usersData.map((u: any) => {
                 const name = this.getNameForUser(u);
-
                 return {
                   idUsuario: u.idusuario,
                   user: u.usuario,
@@ -117,6 +120,7 @@ isAllSelected(): boolean {
     }
   );
 }
+
 changePage(page: number): void {
   if (page >= 1 && page <= this.totalPages) {
     this.currentPage = page;
@@ -168,7 +172,10 @@ toggleSelectAll(): void {
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Sí, eliminar'
+    confirmButtonText: 'Sí, eliminar',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false
   }).then((result) => {
     if (result.isConfirmed) {
       const deleteRequests = this.selectedUserIds.map(id =>
@@ -200,7 +207,10 @@ toggleSelectAll(): void {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sí, eliminar'
+      confirmButtonText: 'Sí, eliminar',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleteUser(id).subscribe(
