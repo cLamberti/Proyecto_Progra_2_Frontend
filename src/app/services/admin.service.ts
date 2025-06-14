@@ -30,4 +30,7 @@ export class AdminService {
     });
     return this._http.get<Admin[]>(`${this.url}Admin/all`, { headers });
   }
+  getAdminById(id: number): Observable<any> {
+    return this._http.get(`${this.url}Admin/${id}`);
+  }
 }

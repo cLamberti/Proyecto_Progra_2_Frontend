@@ -85,7 +85,7 @@ updatePassword() {
     Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
     return;
   }
-
+  
   this.userService.updatePassword(this.identity.id, this.passwordData.password)
     .subscribe({
       next: (response: any) => {
