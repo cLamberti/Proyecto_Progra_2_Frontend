@@ -23,7 +23,7 @@ export class ReservationService {
     const body = JSON.stringify({
       idclient: reservation.idCliente,
       idadministrator: reservation.idAdministrador,
-      idDetail: reservation.idDetalle
+      idDetail: reservation.idDetail
     });
 
     return this.http.post(`${this.url}reservation`, body, { headers });
@@ -49,6 +49,6 @@ export class ReservationService {
   updateReservation(id: number, reservation: Reservation): Observable<any> {
     return this.http.put(`${this.url}/Reservations/update/${id}`, reservation, {
       headers: this.getHeaders()
-    }); 
+    });
   }
 }

@@ -46,7 +46,12 @@ export class RegisterUserAdminComponent {
               title:'Exito',
               text:'Registro de usuario admin exitoso ya puede iniciar sesión',
               icon:'success',
-              confirmButtonText:'Iniciar sesión'
+              confirmButtonText:'Iniciar sesión',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              showCancelButton:false,
+              focusConfirm: true
             }).then((result) => {
               if (result.isConfirmed) {
                 this.router.navigate(['/login']);

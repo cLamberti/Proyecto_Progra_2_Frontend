@@ -31,7 +31,7 @@ export class ReservationRequestComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.reservation.idDetalle) {
+    if (!this.reservation.idDetail) {
       Swal.fire('Error', 'Debe seleccionar un viaje (detalle)', 'error');
       return;
     }

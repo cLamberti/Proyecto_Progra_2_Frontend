@@ -47,7 +47,12 @@ export class RegisterAdminComponent {
                       title: 'exito',
                       text: 'Registro de nombre correcto, ya puede seguir con el registro',
                       icon:'success',
-                      confirmButtonText:'Continuar?'
+                      confirmButtonText:'Continuar',
+                      allowOutsideClick: false,
+                      allowEscapeKey: false,
+                      allowEnterKey: false,
+                      showCancelButton: false,
+                      focusConfirm: true
                     }).then((result) => {
                       if (result.isConfirmed) {
                         this.router.navigate(['/register-user-admin']);

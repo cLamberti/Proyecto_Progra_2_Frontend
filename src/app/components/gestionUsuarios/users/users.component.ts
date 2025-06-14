@@ -168,7 +168,10 @@ toggleSelectAll(): void {
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#3085d6',
-    confirmButtonText: 'Sí, eliminar'
+    confirmButtonText: 'Sí, eliminar',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false
   }).then((result) => {
     if (result.isConfirmed) {
       const deleteRequests = this.selectedUserIds.map(id =>
@@ -200,7 +203,10 @@ toggleSelectAll(): void {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sí, eliminar'
+      confirmButtonText: 'Sí, eliminar',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleteUser(id).subscribe(

@@ -41,7 +41,7 @@
 
     <div class="form-group">
       <label>Viaje</label>
-      <select class="form-control" name="idViaje" [(ngModel)]="travelDetail.id" required>
+      <select class="form-control" name="idViaje" [(ngModel)]="travelDetail.idviaje" required>
         @for (v of travels; track v.id) {
           <option [ngValue]="v.id">{{ v.id }}</option>
         }

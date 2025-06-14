@@ -35,7 +35,12 @@ export class LoginComponent {
             title: 'Exito',
             text: 'Inicio de sesion exitoso',
             icon: 'success',
-            confirmButtonText:'Ok'
+            confirmButtonText:'Ok',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            focusConfirm: true,
+            showCancelButton: false
           }).then((result) => {
             if (result.isConfirmed) {
             this._userService.setToken(response)
