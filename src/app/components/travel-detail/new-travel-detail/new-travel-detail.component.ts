@@ -8,10 +8,11 @@ import { ProviderService } from '../../../services/provider.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-travel-detail',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './new-travel-detail.component.html',
   styleUrl: './new-travel-detail.component.css'
 })
@@ -29,7 +30,7 @@ export class NewTravelDetailComponent implements OnInit{
     private providerService: ProviderService,
     private route:Router
   ) {
-    this.travelDetail = new TravelDetail(1,'', '', 0, 0);
+    this.travelDetail = new TravelDetail(1,'', '', 0, 0, 0);
   }
 
   ngOnInit(): void {
@@ -103,4 +104,8 @@ export class NewTravelDetailComponent implements OnInit{
     });
     }
   }
+
+  trackById(index: number, item: any): number {
+  return item.idviaje;
+}
 }

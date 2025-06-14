@@ -3,15 +3,15 @@
 
   <span>
     @switch(status) {
-      @case (0) {
-        <div class="alert alert-success">Registro exitoso</div>
-      }
-      @case (1) {
-        <div class="alert alert-warning">Registro no guardado</div>
-      }
-      @case (2) {
-        <div class="alert alert-danger">Error de servidor</div>
-      }
+    @case (0) {
+    <div class="alert alert-success">Registro exitoso</div>
+    }
+    @case (1) {
+    <div class="alert alert-warning">Registro no guardado</div>
+    }
+    @case (2) {
+    <div class="alert alert-danger">Error de servidor</div>
+    }
     }
   </span>
 
@@ -31,17 +31,17 @@
       <select class="form-control" name="idproveedor" [(ngModel)]="travelDetail.idproveedor">
         <option [ngValue]="null">-- Sin proveedor --</option>
         @for (p of providers; track p.idproveedor) {
-          <option [ngValue]="p.idproveedor">{{ p.nombre }}</option>
+        <option [ngValue]="p.idproveedor">{{ p.nombre }}</option>
         }
       </select>
     </div>
 
     <div class="form-group">
       <label>Viaje</label>
-      <select class="form-control" name="id" [(ngModel)]="travelDetail.id" required>
-        @for (v of travels; track v.id) {
-          <option [ngValue]="v.id">{{ v.id }}</option>
-        }
+      <select class="form-control" name="idviaje" [(ngModel)]="travelDetail.idViaje" required>
+        <option *ngFor="let v of travels; trackBy: trackById" [ngValue]="v.idviaje">
+          {{ v.tipoviaje }} - {{ v.descripcion }}
+        </option>
       </select>
     </div>
 

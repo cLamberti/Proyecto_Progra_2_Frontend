@@ -18,14 +18,14 @@ export class UpdateTravelDetailComponent implements OnInit{
   public token: string | null = '';
   public travels: any[] = [];
   public providers: any[] = [];
-  
+
   constructor(
     private travelDetailService: TravelDetailService,
     private userService: UserService,
     private travelService: TravelService,
     private providerService: ProviderService
   ) {
-    this.travelDetail = new TravelDetail(0,'', '', 0, 0);
+    this.travelDetail = new TravelDetail(0,'', '', 0, 0, 0);
   }
 
   ngOnInit(): void {
@@ -71,6 +71,6 @@ export class UpdateTravelDetailComponent implements OnInit{
         this.status = 2 // Error de servidor
       }
     });
-  }  
+  }
 
 }
