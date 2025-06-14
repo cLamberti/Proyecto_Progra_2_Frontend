@@ -70,13 +70,16 @@ isAllSelected(): boolean {
   loadUsers(): void {
   this.clientService.getClient().subscribe(
     (clientsData) => {
+      if (!clientsData) clientsData = []; // ← Asegura que no sea null
       this.clients = clientsData.map((c: any) => ({
         idClient: c.idcliente,
-        name: c.nombre
+        name: c.nombre,
+        telefono: c.telefono
       }));
 
       this.adminService.getAdmin().subscribe(
         (adminsData) => {
+          if (!adminsData) adminsData = []; // ← Asegura que no sea null
           this.admins = adminsData.map((a: any) => ({
             idAdmin: a.idadministrador,
             name: a.nombre
@@ -84,9 +87,9 @@ isAllSelected(): boolean {
 
           this.userService.getUsers().subscribe(
             (usersData) => {
+              if (!usersData) usersData = []; // ← Asegura que no sea null
               const mappedUsers = usersData.map((u: any) => {
                 const name = this.getNameForUser(u);
-
                 return {
                   idUsuario: u.idusuario,
                   user: u.usuario,
@@ -117,6 +120,7 @@ isAllSelected(): boolean {
     }
   );
 }
+
 changePage(page: number): void {
   if (page >= 1 && page <= this.totalPages) {
     this.currentPage = page;

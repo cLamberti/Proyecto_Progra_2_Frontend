@@ -25,7 +25,7 @@ export class RegisterClientComponent {
     private router:Router
   ){
     this.statusService.status=-1
-    this.client=new Client(0, "")
+    this.client=new Client(0, "", "")
   }
   changeStatus(st:number){
     this.statusService.status=st
