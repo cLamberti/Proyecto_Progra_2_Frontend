@@ -45,7 +45,7 @@ export class RegisterClientComponent {
           sessionStorage.setItem('identityClient', JSON.stringify(this.client.idClient));
           Swal.fire({
             title: 'exito',
-            text: 'Registro de nombre correcto, ya puede seguir con el registro',
+            text: 'Registro de nombre y telefono correcto, ya puede seguir con el registro',
             icon:'success',
             confirmButtonText:'Continuar',
             allowOutsideClick: false,

@@ -61,6 +61,19 @@ export class UsersComponent implements OnInit {
 
   return name;
 }
+getTelForUser(u: any): string {
+  let telefono = '';
+
+  if (u.idcliente && u.idcliente.Valid) {
+    const client = this.clients.find(c => c.idClient === u.idcliente.Int32);
+    telefono = client ? client.telefono : 'Cliente no encontrado';
+  } else if (u.idadministrador && u.idadministrador.Valid) {
+    const admin = this.admins.find(a => a.idAdmin === u.idadministrador.Int32);
+    telefono = "N/A"
+  }
+
+  return telefono;
+}
 isAllSelected(): boolean {
   return this.filteredUsers.length > 0 &&
          this.filteredUsers.every(user => this.selectedUserIds.includes(user.idUsuario));
@@ -90,11 +103,13 @@ isAllSelected(): boolean {
               if (!usersData) usersData = []; // ← Asegura que no sea null
               const mappedUsers = usersData.map((u: any) => {
                 const name = this.getNameForUser(u);
+                const telefono = this.getTelForUser(u);
                 return {
                   idUsuario: u.idusuario,
                   user: u.usuario,
                   email: u.correo,
                   role: u.role,
+                  telefono: telefono,
                   idCliente: u.idcliente && u.idcliente.Valid ? u.idcliente.Int32 : null,
                   idAdministrador: u.idadministrador && u.idadministrador.Valid ? u.idadministrador.Int32 : null,
                   name: name
@@ -189,7 +204,7 @@ toggleSelectAll(): void {
           this.filteredUsers = this.filteredUsers.filter(user => !this.selectedUserIds.includes(user.idUsuario));
           this.selectedUserIds = [];
           Swal.fire('Eliminados', 'Los usuarios han sido eliminados.', 'success');
-          this._route.navigate(['/users']);
+          this.loadUsers();
         })
         .catch((error) => {
           console.error('Error al eliminar usuarios', error);
@@ -218,6 +233,7 @@ toggleSelectAll(): void {
             this.users = this.users.filter(user => user.idUsuario !== id);
             this.filteredUsers = this.filteredUsers.filter(user => user.idUsuario !== id);
             Swal.fire('Eliminado', 'El usuario ha sido eliminado.', 'success');
+            this.loadUsers();
           },
           (error) => {
             console.error('Error al eliminar usuario', error);
