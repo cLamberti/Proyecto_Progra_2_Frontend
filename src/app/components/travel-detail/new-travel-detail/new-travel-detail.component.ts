@@ -30,7 +30,7 @@ export class NewTravelDetailComponent implements OnInit{
     private providerService: ProviderService,
     private route:Router
   ) {
-    this.travelDetail = new TravelDetail(1,'', '', 0, 0, 0);
+    this.travelDetail = new TravelDetail(1,'', '', 0, 0);
   }
 
   ngOnInit(): void {
@@ -75,6 +75,7 @@ export class NewTravelDetailComponent implements OnInit{
       return;
     }
     else{
+      console.log('Enviando al backend:', JSON.stringify(this.travelDetail, null, 2));
       this.travelDetailService.CreateDetail(this.travelDetail, this.token).subscribe({
       next:(response:any)=>{
         console.log(response)

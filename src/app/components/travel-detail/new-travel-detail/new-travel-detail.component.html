@@ -38,7 +38,7 @@
 
     <div class="form-group">
       <label>Viaje</label>
-      <select class="form-control" name="idviaje" [(ngModel)]="travelDetail.idViaje" required>
+      <select class="form-control" name="idviaje" [(ngModel)]="travelDetail.idviaje" required>
         <option *ngFor="let v of travels; trackBy: trackById" [ngValue]="v.idviaje">
           {{ v.tipoviaje }} - {{ v.descripcion }}
         </option>

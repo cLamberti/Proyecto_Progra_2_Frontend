@@ -25,7 +25,7 @@ export class UpdateTravelDetailComponent implements OnInit{
     private travelService: TravelService,
     private providerService: ProviderService
   ) {
-    this.travelDetail = new TravelDetail(0,'', '', 0, 0, 0);
+    this.travelDetail = new TravelDetail(0,'', '', 0, 0);
   }
 
   ngOnInit(): void {
