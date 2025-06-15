@@ -214,7 +214,12 @@ export class AdProveedoresComponent {
           next: () => {
             this.resetForm(form);
             this.loadProviders();
-            Swal.fire('Actualizado', 'Proveedor actualizado correctamente.', 'success');
+            Swal.fire({
+              icon: 'success',
+              title: 'Proveedor actualizado',
+              text: `El proveedor con ID ${id} fue actualizado correctamente.`,
+              confirmButtonText: 'Aceptar'
+            });
           },
           error: (err: Error) => {
             console.error(err);
@@ -232,7 +237,12 @@ export class AdProveedoresComponent {
           next: () => {
             this.resetForm(form);
             this.loadProviders();
-            Swal.fire('Actualizado', 'Proveedor actualizado correctamente.', 'success');
+            Swal.fire({
+              icon: 'success',
+              title: 'Proveedor actualizado',
+              text: `El proveedor "${this.searchValue}" fue actualizado correctamente.`,
+              confirmButtonText: 'Aceptar'
+            });
           },
           error: (err: Error) => {
             console.error(err);
@@ -244,13 +254,17 @@ export class AdProveedoresComponent {
     } else {
       this.providerService.CreateProvider(createData, token).subscribe({
         next: (response) => {
-          if (response.generated_id) {
-            this.resetForm(form);
-            this.loadProviders();
-            Swal.fire('Éxito', 'Proveedor creado correctamente.', 'success');
-          } else {
-            Swal.fire('Advertencia', 'No se pudo crear el proveedor.', 'warning');
-          }
+          this.resetForm(form);
+          this.loadProviders();
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Proveedor creado',
+            text: response.generated_id
+              ? `Proveedor "${createData.name}" creado con ID ${response.generated_id}.`
+              : `Proveedor "${createData.name}" creado correctamente.`,
+            confirmButtonText: 'Aceptar'
+          });
         },
         error: (err: Error) => {
           console.error(err);
