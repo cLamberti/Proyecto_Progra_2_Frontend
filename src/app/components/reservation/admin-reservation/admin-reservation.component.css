@@ -1,0 +1,24 @@
+.header {
+  text-align: center;
+}
+
+.left-column {
+  width: 95%;
+  padding: 10px;
+}
+
+.form-container {
+  width: 60%;
+}
+
+.tabla-reservas {
+  width: 60%;
+}
+
+.container {
+  display: flex;
+}
+
+.search-reservation {
+  width: 45%;
+}

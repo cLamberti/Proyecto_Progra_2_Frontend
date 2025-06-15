@@ -1,1 +1,71 @@
-<p>admin-reservation works!</p>
+<div class="header">
+  <h1>Gestión de Reservas</h1>
+</div>
+<div class="container" style="padding-bottom: 5%;">
+  <form class="form-container" #reservationForm="ngForm" (ngSubmit)="onSubmit(reservationForm)">
+    <div class="form-reserva left-column">
+      <div class="form-detalle">
+        <span>Agrega el detalle del viaje</span><br>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-sailboat"></i></span>
+            <select class="form-control" name="idDetail" [(ngModel)]="reservation.idDetail" required>
+                <option [ngValue]="null">-- Sin proveedor --</option>
+                @for (t of travelDetails; track t.idDetail) {
+                <option [ngValue]="t.idDetail">{{ t.fecha }}</option>
+                }
+            </select>
+        </div>
+      </div>
+      <div class="form-usuario">
+        <span>Agrega el usuario</span><br>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-sailboat"></i></span>
+            <select class="form-control" name="idUsuario" [(ngModel)]="reservation.idUsuario" required>
+                <option *ngFor="let u of users; trackBy: trackById" [ngValue]="u.idUsuario">
+                {{ u.usuario }} - {{ u.correo }}
+                </option>
+            </select>
+        </div>
+      </div>
+      <div class="form-estado">
+        <span>Agrega el estado</span><br>
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-file-contract"></i></span>
+          <input type="text" class="estado form-control" placeholder="Estado reserva" aria-label="estado"
+            aria-describedby="basic-addon1" name="type" [(ngModel)]="reservation.estado" required>
+        </div>
+      </div>      
+      <input type="submit" class="btn btn-success mt-2" value="Guardar reserva" [disabled]="reservationForm.invalid"
+        [routerLink]="'/admin-reservation'">
+    </div>
+  </form>
+  <table class="tabla-reservas table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Índice</th>
+        <th scope="col"> Usuario</th>        
+        <th scope="col"> Detalle</th>
+        <th scope="col"> Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reservations; index as i">
+        <th scope="row">{{ item.idreservas }}</th>
+        <td>{{ item.idusuario }}</td>        
+        <td>{{ item.iddetalle }}</td>
+        <td>{{ item.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="search-reservation">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar una reserva por índice" [(ngModel)]="searchId"
+      name="searchId" aria-label="Example text with two button addons">
+    <button class="btn btn-outline-primary" type="button" (click)="getReservationById(searchId)">Buscar</button>
+    <button class="btn btn-outline-secondary" type="button" (click)="updateReservation(reservation.idReservas)">modificar</button>
+    <button class="btn btn-outline-danger" type="button" (click)="deleteReservationById(searchId)">eliminar</button>
+    <button class="btn btn-outline-warning" type="button" *ngIf="showSingleTravel" (click)="clearSearch()">Limpiar
+      búsqueda</button>
+  </div>
+</div>
