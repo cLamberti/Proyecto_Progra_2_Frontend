@@ -15,18 +15,15 @@ export class ReservationService {
     this.url = server.url;
   }
 
-  createReservation(token: string, reservation: Reservation): Observable<any> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token);
-
+  createReservation(token: any, idUser:number, idDetail:number): Observable<any> {
+    const headers = this.getHeaders()
     const body = JSON.stringify({
-      idclient: reservation.idCliente,
-      idadministrator: reservation.idAdministrador,
-      idDetail: reservation.idDetail
+      idUsuario: idUser,
+      idDetail: idDetail,
+      estado: "Pendiente"
     });
 
-    return this.http.post(`${this.url}reservation`, body, { headers });
+    return this.http.post(`${this.url}Reservations`, body, { headers });
   }
   private getHeaders(): HttpHeaders {
     const token = sessionStorage.getItem('token');

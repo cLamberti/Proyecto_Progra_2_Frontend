@@ -45,6 +45,13 @@ export class TravelDetailService {
     }
     return this._http.get(this.url + 'Details/' + id, options)
   }
+  setTravelDetailID(response:any) {
+    sessionStorage.setItem('TravelDetailID', response.generated_id)
+  }
+  getTravelDetailID(){
+    const TravelDetailID = sessionStorage.getItem('TravelDetailID')
+    return TravelDetailID ? JSON.parse(TravelDetailID) : Number;
+  }
 
   UpdateDetail(id: number, travelDetail: TravelDetail, token: any): Observable<any> {
     this.accessToken = "bearer " + token

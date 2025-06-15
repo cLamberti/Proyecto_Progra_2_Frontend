@@ -43,10 +43,7 @@
               </li>
             </ul>
           }
-          @else if(role == "Client"){
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/viaje']"><i class="fa-solid fa-map-location-dot"></i>Viajes</a>
-            </li>
+          @else if(role == "Client"){ 
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/reservation']"><i class="fa-solid fa-receipt"></i> Reserva</a>
             </li>

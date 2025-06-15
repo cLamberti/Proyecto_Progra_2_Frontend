@@ -9,6 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReservationService } from '../../../services/reservation.service';
 
 @Component({
   selector: 'app-new-travel-detail',
@@ -28,6 +29,7 @@ export class NewTravelDetailComponent implements OnInit{
     private userService: UserService,
     private travelService: TravelService,
     private providerService: ProviderService,
+    private reservationService: ReservationService,
     private route:Router
   ) {
     this.travelDetail = new TravelDetail(1,'', '', 0, 0);
@@ -81,6 +83,7 @@ export class NewTravelDetailComponent implements OnInit{
         console.log(response)
         this.status = 0 // Éxito
         form.reset()
+        this.travelDetailService.setTravelDetailID(response);
         Swal.fire({
           title: 'Exito',
           text: 'Exito, Reserva exitosa',
@@ -93,7 +96,23 @@ export class NewTravelDetailComponent implements OnInit{
           focusConfirm: true
         }).then((response => {
           if (response.isConfirmed){
-            this.route.navigate(['/reservation-pasajeros'])
+            const token = this.userService.getToken();
+            const identity = this.userService.getIdentity();
+            const idUser = identity.id;
+            const idDetail = this.travelDetailService.getTravelDetailID();
+            console.log("toke: ", token)
+            console.log("identity: ", identity)
+            console.log("idUSer: ", idUser)
+            console.log("idDetail: ", idDetail)
+            this.reservationService.createReservation(token, idUser, idDetail).subscribe({
+            next: (response: any) => {
+              console.log('Reserva creada:', response);
+            },
+            error: (err: any) => {
+              console.error('Error al crear reserva:', err);
+              Swal.fire('Error', 'No se pudo crear la reserva', 'error');
+            }
+          });
           }
         }));
       },
