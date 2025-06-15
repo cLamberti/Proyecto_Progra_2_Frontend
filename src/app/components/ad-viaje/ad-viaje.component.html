@@ -1,13 +1,12 @@
-<div class="container mt-4">
-  <div class="header text-center mb-4">
-    <h1>Gestión de Viajes</h1>
-  </div>
+<div class="container my-4">
 
-  <div class="card mb-4">
-    <div class="card-body">
+  <div class="row-form-tabla">
+
+    <!-- Formulario de creación/edición -->
+    <div class="col-form card p-4">
       <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
         <div class="mb-3">
-          <label class="form-label">Nombre del viaje</label>
+          <label class="form-label fw-bold">Nombre del viaje</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-sailboat"></i></span>
             <input type="text" class="form-control" placeholder="Nombre Viaje" name="type"
@@ -16,7 +15,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Descripción del viaje</label>
+          <label class="form-label fw-bold">Descripción del viaje</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
             <textarea class="form-control" placeholder="Detalles importantes del viaje" name="description"
@@ -24,17 +23,18 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-success" [disabled]="travelForm.invalid">
-          <i class="fa-solid fa-floppy-disk me-1"></i> Guardar viaje
-        </button>
+        <div class="text-end">
+          <button type="submit" class="btn btn-success" [disabled]="travelForm.invalid">
+            <i class="fa-solid fa-floppy-disk me-1"></i> Guardar viaje
+          </button>
+        </div>
       </form>
     </div>
-  </div>
 
-  <div class="card mb-4">
-    <div class="card-header">Buscar, Modificar o Eliminar Viajes</div>
-    <div class="card-body">
-      <div class="input-group mb-3">
+    <!-- Búsqueda, modificación y eliminación -->
+    <div class="col-tabla card p-4">
+      <h5 class="fw-bold mb-3">Buscar, Modificar o Eliminar Viajes</h5>
+      <div class="input-group">
         <input type="text" class="form-control" placeholder="Buscar un viaje por índice" [(ngModel)]="searchId"
           name="searchId">
         <button class="btn btn-outline-primary" type="button" (click)="getTravelById(searchId)">
@@ -51,13 +51,15 @@
         </button>
       </div>
     </div>
+
   </div>
 
-  <div class="card">
-    <div class="card-header">Listado de Viajes</div>
-    <div class="card-body p-0">
-      <table class="table table-striped mb-0">
-        <thead class="table-primary">
+  <!-- Tabla de viajes -->
+  <div class="card mt-4 p-3">
+    <h5 class="fw-bold mb-3">Listado de Viajes</h5>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="text-center">
           <tr>
             <th>Índice</th>
             <th>Tipo</th>
@@ -70,8 +72,12 @@
             <td>{{ item.tipoviaje }}</td>
             <td>{{ item.descripcion }}</td>
           </tr>
+          <tr *ngIf="!travels || travels.length === 0">
+            <td colspan="3" class="text-center text-muted">No se encontraron viajes.</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
+
 </div>
