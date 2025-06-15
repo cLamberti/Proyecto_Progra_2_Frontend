@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { timer } from 'rxjs';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import Swal from 'sweetalert2'; // ✅ SweetAlert2
+import Swal from 'sweetalert2'; // ✅ Sweet
 
 @Component({
   selector: 'app-ad-viaje',
