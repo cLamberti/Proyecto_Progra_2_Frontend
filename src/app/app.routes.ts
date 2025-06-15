@@ -16,7 +16,6 @@ import { UpdateTravelDetailComponent } from './components/travel-detail/update-t
 import { DeleteTravelDetailComponent } from './components/travel-detail/delete-travel-detail/delete-travel-detail.component';
 import { AdProveedoresComponent } from './components/ad-proveedores/ad-proveedores.component';
 import { AdminReservationComponent } from './components/reservation/admin-reservation/admin-reservation.component';
-import { ClientPhonesComponent } from './components/client-phones/client-phones.component';
 
 
 export const routes: Routes = [
@@ -36,7 +35,6 @@ export const routes: Routes = [
     {path:'borrar-detalleViaje',component:DeleteTravelDetailComponent},
     {path: 'ad-proveedores', component: AdProveedoresComponent },
     {path: 'admin-reservation', component:AdminReservationComponent},
-    {path: 'client-phones', component: ClientPhonesComponent},
 
     {path:'**',component:ErrorComponent}
 ];

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'; // ✅ Sweet
 
 @Component({
   selector: 'app-ad-viaje',
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './ad-viaje.component.html',
   styleUrl: './ad-viaje.component.css',
 })
