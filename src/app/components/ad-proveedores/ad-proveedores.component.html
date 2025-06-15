@@ -1,67 +1,95 @@
-<div class="header">
-  <h1>Gestión Proveedores</h1>
+<div class="header text-center py-3 bg-primary text-white">
+  <h1>Gestión de Proveedores</h1>
 </div>
-<div class="container">
-  <form class="form-container" #providerForm="ngForm" (ngSubmit)="onSubmit(providerForm)">
-    <div class="form-proveedores left-column">
-      <div class="form-name">
-        <span>Nombre del proveedor</span><br>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-file-contract"></i></span>
-          <input type="text" class="nombre-proveedor form-control" placeholder="Nombre Proveedor" aria-label="nombre-proveedor"
-            aria-describedby="basic-addon1" name="type" [(ngModel)]="provider.nombre" required>
-        </div>
+
+<div class="container my-4">
+
+  <!-- 🔍 Filtro de búsqueda -->
+  <div class="mb-4">
+    <label for="filterType" class="form-label fw-bold">Buscar, borrar o modificar por:</label>
+    <div class="row g-2 align-items-center">
+      <div class="col-md-4">
+        <select id="filterType" class="form-select" [(ngModel)]="filterType">
+          <option value="id">ID</option>
+          <option value="name">Nombre</option>
+        </select>
       </div>
-      <div class="form-description">
-        <span>Agrega una pequeña descripción del proveedor</span><br>
+      <div class="col-md-8">
         <div class="input-group">
-          <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
-          <textarea class="form-control" aria-label="detalles importantes" placeholder="Detalles importantes del proveedor"
-            name="description" [(ngModel)]="provider.descrip" required></textarea>
+          <input type="text" class="form-control"
+            [placeholder]="filterType === 'id' ? 'Ingrese el ID del proveedor' : 'Ingrese el nombre del proveedor'"
+            [(ngModel)]="searchValue" name="searchValue">
+
+          <button class="btn btn-outline-primary" type="button" (click)="search()">Buscar</button>
+          <button class="btn btn-outline-success" type="button" (click)="updateProvider()">Modificar</button>
+          <button class="btn btn-outline-danger" type="button" (click)="deleteProvider()">Eliminar</button>
+          <button class="btn btn-outline-warning" type="button" *ngIf="showSingleProvider" (click)="clearSearch()">
+            Limpiar
+          </button>
         </div>
       </div>
-      <input type="submit" class="btn btn-success mt-2" [value]="isEditing ? 'Actualizar proveedor' : 'Guardar proveedor'" [disabled]="providerForm.invalid"
-        [routerLink]="'/ad-proveedores'">
     </div>
-  </form>
-  <table class="tabla-proveedores table-striped">
-    <thead>
-      <tr class="table-primary">
-        <th scope="col">Índice</th>
-        <th scope="col"> Nombre</th>
-        <th scope="col"> Descripción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of providers; index as i">
-        <th scope="row">{{ item.idproveedor }}</th>
-        <td>{{ item.nombre }}</td>
-        <td>{{ item.descrip }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-  <!-- Selector de tipo de búsqueda -->
-<div class= "mb-3">
-  <label for="filterType" class="form-label">Buscar, borrar o modificar por:</label>
-  <div class="select-type">
-    <select id="filterType" class="form-select" [(ngModel)]="filterType">
-      <option value="id">ID</option>
-      <option value="name">Nombre</option>
-    </select>
   </div>
-</div>
 
-<div class="search-provider">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" [placeholder]="filterType === 'id' ? 'Ingrese el ID del proveedor' : 'Ingrese el nombre del proveedor'" [(ngModel)]="searchValue"
-      name="searchValue" aria-label="Example text with two button addons"> 
+  <!-- 📝 Formulario de proveedor -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <form #providerForm="ngForm" (ngSubmit)="onSubmit(providerForm)">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Nombre del proveedor</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-file-contract"></i></span>
+              <input type="text" class="form-control" placeholder="Nombre Proveedor" name="type"
+                [(ngModel)]="provider.nombre" required>
+            </div>
+          </div>
 
-    <button class="btn btn-outline-primary" type="button" (click)="search()">Buscar</button>
-    <button class="btn btn-outline-secondary" type="button" (click)="updateProvider()">modificar</button>
-    <button class="btn btn-outline-danger" type="button" (click)="deleteProvider()">eliminar</button>
-    <button class="btn btn-outline-warning" type="button" *ngIf="showSingleProvider" (click)="clearSearch()">Limpiar
-      búsqueda</button>
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Descripción del proveedor</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
+              <textarea class="form-control" placeholder="Detalles importantes del proveedor" name="description"
+                [(ngModel)]="provider.descrip" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-end mt-4">
+          <input type="submit" class="btn btn-success"
+            [value]="isEditing ? 'Actualizar proveedor' : 'Guardar proveedor'" [disabled]="providerForm.invalid">
+        </div>
+      </form>
+    </div>
   </div>
+
+  <!-- 📋 Tabla de proveedores -->
+  <div class="card shadow">
+    <div class="card-body">
+      <h5 class="card-title">Listado de Proveedores</h5>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered mt-3">
+          <thead class="table-primary text-center">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of providers">
+              <td>{{ item.idproveedor }}</td>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.descrip }}</td>
+            </tr>
+            <tr *ngIf="!providers || providers.length === 0">
+              <td colspan="3" class="text-center text-muted">No se encontraron proveedores.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
+

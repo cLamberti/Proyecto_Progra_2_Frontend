@@ -1,54 +1,77 @@
-<div class="header">
-  <h1>Gestión de Viajes</h1>
-</div>
-<div class="container" style="padding-bottom: 5%;">
-  <form class="form-container" #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
-    <div class="form-viajes left-column">
-      <div class="form-name">
-        <span>Nombre del viaje</span><br>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-sailboat"></i></span>
-          <input type="text" class="nombre-viaje form-control" placeholder="Nombre Viaje" aria-label="nombre-viaje"
-            aria-describedby="basic-addon1" name="type" [(ngModel)]="travel.tipoviaje" required>
+<div class="container mt-4">
+  <div class="header text-center mb-4">
+    <h1>Gestión de Viajes</h1>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <form #travelForm="ngForm" (ngSubmit)="onSubmit(travelForm)">
+        <div class="mb-3">
+          <label class="form-label">Nombre del viaje</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-sailboat"></i></span>
+            <input type="text" class="form-control" placeholder="Nombre Viaje" name="type"
+              [(ngModel)]="travel.tipoviaje" required>
+          </div>
         </div>
-      </div>
-      <div class="form-description">
-        <span>Agrega una pequeña descripción del viaje</span><br>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
-          <textarea class="form-control" aria-label="detalles importantes" placeholder="Detalles importantes del viaje"
-            name="description" [(ngModel)]="travel.descripcion" required></textarea>
+
+        <div class="mb-3">
+          <label class="form-label">Descripción del viaje</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-circle-info"></i></span>
+            <textarea class="form-control" placeholder="Detalles importantes del viaje" name="description"
+              [(ngModel)]="travel.descripcion" required></textarea>
+          </div>
         </div>
-      </div>
-      <input type="submit" class="btn btn-success mt-2" value="Guardar viaje" [disabled]="travelForm.invalid"
-        [routerLink]="'/ad-viaje'">
+
+        <button type="submit" class="btn btn-success" [disabled]="travelForm.invalid">
+          <i class="fa-solid fa-floppy-disk me-1"></i> Guardar viaje
+        </button>
+      </form>
     </div>
-  </form>
-  <table class="tabla-viajes table-striped">
-    <thead>
-      <tr class="table-primary">
-        <th scope="col">Índice</th>
-        <th scope="col"> Tipo</th>
-        <th scope="col"> Descripción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of travels; index as i">
-        <th scope="row">{{ item.idviaje }}</th>
-        <td>{{ item.tipoviaje }}</td>
-        <td>{{ item.descripcion }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="search-travel">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Buscar un viaje por índice" [(ngModel)]="searchId"
-      name="searchId" aria-label="Example text with two button addons">
-    <button class="btn btn-outline-primary" type="button" (click)="getTravelById(searchId)">Buscar</button>
-    <button class="btn btn-outline-secondary" type="button" (click)="updateTravel(travel.idviaje)">modificar</button>
-    <button class="btn btn-outline-danger" type="button" (click)="deleteTravelById(searchId)">eliminar</button>
-    <button class="btn btn-outline-warning" type="button" *ngIf="showSingleTravel" (click)="clearSearch()">Limpiar
-      búsqueda</button>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">Buscar, Modificar o Eliminar Viajes</div>
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Buscar un viaje por índice" [(ngModel)]="searchId"
+          name="searchId">
+        <button class="btn btn-outline-primary" type="button" (click)="getTravelById(searchId)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" (click)="updateTravel(travel.idviaje)">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="btn btn-outline-danger" type="button" (click)="deleteTravelById(searchId)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+        <button class="btn btn-outline-warning" type="button" *ngIf="showSingleTravel" (click)="clearSearch()">
+          <i class="fa-solid fa-xmark"></i> Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Listado de Viajes</div>
+    <div class="card-body p-0">
+      <table class="table table-striped mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th>Índice</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of travels">
+            <td>{{ item.idviaje }}</td>
+            <td>{{ item.tipoviaje }}</td>
+            <td>{{ item.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
