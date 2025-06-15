@@ -17,9 +17,20 @@ export class ReservaService {
   getAllReservas(): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(`${this.url}Reservations/all`);
   }
-
   getReservaById(id: number): Observable<Reservation> {
     return this.http.get<Reservation>(`${this.url}Reservations/${id}`);
+  createReservation(token: string, reservation: Reservation): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token);
+
+    const body = JSON.stringify({
+      idclient: reservation.idCliente,
+      idadministrator: reservation.idAdministrador,
+      idDetail: reservation.idDetail
+    });
+
+    return this.http.post(`${this.url}reservation`, body, { headers });
   }
 
   createReserva(reserva: { idUsuario: number; idDetail: number; estado: string }): Observable<Reservation> {
@@ -33,8 +44,11 @@ export class ReservaService {
   updateEstado(id: number, estado: string): Observable<any> {
     return this.http.put(`${this.url}Reservations/status/${id}`, { estado });
   }
-
   deleteReserva(id: number): Observable<any> {
     return this.http.delete(`${this.url}Reservations/delete/${id}`);
+  updateReservation(id: number, reservation: Reservation): Observable<any> {
+    return this.http.put(`${this.url}/Reservations/update/${id}`, reservation, {
+      headers: this.getHeaders()
+    });
   }
 }
