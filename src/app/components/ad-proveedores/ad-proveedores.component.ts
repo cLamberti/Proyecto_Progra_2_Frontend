@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-proveedores',
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './ad-proveedores.component.html',
   styleUrl: './ad-proveedores.component.css'
 })
