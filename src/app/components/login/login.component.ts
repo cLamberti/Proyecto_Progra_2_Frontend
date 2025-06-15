@@ -5,11 +5,11 @@ import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, SweetAlert2Module],
+  imports: [FormsModule, SweetAlert2Module, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [UserService]
@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   public status: number;
   public user: User;
+  public showPassword: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -32,10 +33,10 @@ export class LoginComponent {
       next: (response: any) => {
         if (response.access_token) {
           Swal.fire({
-            title: 'Exito',
-            text: 'Inicio de sesion exitoso',
+            title: 'Éxito',
+            text: 'Inicio de sesión exitoso',
             icon: 'success',
-            confirmButtonText:'Ok',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             allowEscapeKey: false,
             allowEnterKey: false,
@@ -43,12 +44,12 @@ export class LoginComponent {
             showCancelButton: false
           }).then((result) => {
             if (result.isConfirmed) {
-            this._userService.setToken(response)
-            this._userService.setIdentity(response)
-            this._userService.setRole(response)
-            this._router.navigate(['']);
+              this._userService.setToken(response);
+              this._userService.setIdentity(response);
+              this._userService.setRole(response);
+              this._router.navigate(['']);
             }
-            });;
+          });
         } else {
           this.status = 0;
         }
@@ -56,8 +57,9 @@ export class LoginComponent {
       error: (err) => {
         console.log(err);
         this.status = 1;
-        Swal.fire('Error', 'Inicio de sesion fallo, Usuario y/o contraseña incorrecta', 'error');
+        Swal.fire('Error', 'Inicio de sesión falló, Usuario y/o contraseña incorrecta', 'error');
       }
     });
   }
 }
+
