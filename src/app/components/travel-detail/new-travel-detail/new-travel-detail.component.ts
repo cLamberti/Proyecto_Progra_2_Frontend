@@ -8,10 +8,11 @@ import { ProviderService } from '../../../services/provider.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-travel-detail',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './new-travel-detail.component.html',
   styleUrl: './new-travel-detail.component.css'
 })
@@ -74,6 +75,7 @@ export class NewTravelDetailComponent implements OnInit{
       return;
     }
     else{
+      console.log('Enviando al backend:', JSON.stringify(this.travelDetail, null, 2));
       this.travelDetailService.CreateDetail(this.travelDetail, this.token).subscribe({
       next:(response:any)=>{
         console.log(response)
@@ -103,4 +105,8 @@ export class NewTravelDetailComponent implements OnInit{
     });
     }
   }
+
+  trackById(index: number, item: any): number {
+  return item.idviaje;
+}
 }
