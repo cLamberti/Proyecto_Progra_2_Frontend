@@ -1,11 +1,11 @@
-import { UserService } from './../../services/user.service';
-import { ProviderService } from './../../services/provider.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Provider } from '../../models/provider';
-import { timer } from 'rxjs';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { UserService } from './../../services/user.service';
+import { ProviderService } from './../../services/provider.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-proveedores',
@@ -14,287 +14,249 @@ import { CommonModule } from '@angular/common';
   styleUrl: './ad-proveedores.component.css'
 })
 export class AdProveedoresComponent {
-  public status: any
-  public provider: any
-  public providers: any
-  private checkTravels: any
-  public token: any
-  public searchId: number = 0
-  public showSingleProvider = false
-  public filterType: string = 'id'; // puede ser 'id' o 'name'
+  public status: any;
+  public provider: Provider;
+  public providers: any;
+  private checkTravels: any;
+  public token: any;
+  public searchId: number = 0;
+  public showSingleProvider = false;
+  public filterType: string = 'id';
   public searchValue: string = '';
   public isEditing: boolean = false;
 
   constructor(private providerService: ProviderService, private userService: UserService) {
-    this.status = -1
-    this.provider = new Provider(0, "", "")
-    this.loadProviders()
+    this.status = -1;
+    this.provider = new Provider(0, "", "");
+    this.loadProviders();
     this.checkTravels = setInterval(() => {
-      this.loadProviders()
-    }, 2500)
-  }
-  changeStatus(st: number) {
-    this.status = st
-    let countdown = timer(4000)
-    countdown.subscribe(n => {
-      this.status = -1
-    })
+      this.loadProviders();
+    }, 2500);
   }
 
   ngOnInit(): void {
-    this.token = this.userService.getToken()
-    this.loadProviders()
+    this.token = this.userService.getToken();
+    this.loadProviders();
   }
 
   public loadProviders() {
     this.providerService.GetAllProviders(this.token).subscribe({
       next: (response: any) => {
-        console.log(response)
-        this.providers = response
+        this.providers = response;
       },
       error: (err: Error) => {
-        console.log(err)
-        this.providers = null
+        console.error(err);
+        this.providers = null;
       }
-    })
+    });
   }
 
-  deleteProvider(): void {
-    const confirmed = confirm(`¿Estás seguro de que deseas eliminar el proveedor por ${this.filterType}?`);
-    if (!confirmed) return;
-
+  async deleteProvider(): Promise<void> {
     if (!this.searchValue.trim()) {
-      this.status = 'Ingrese un valor de búsqueda.';
+      Swal.fire('Error', 'Ingrese un valor de búsqueda.', 'warning');
       return;
     }
+
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar el proveedor por ${this.filterType}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (!result.isConfirmed) return;
+
+    const token = this.userService.getToken();
 
     if (this.filterType === 'id') {
       const id = parseInt(this.searchValue, 10);
       if (isNaN(id)) {
-        this.status = 1;
+        Swal.fire('Error', 'El ID debe ser un número.', 'error');
         return;
       }
-      
-      this.token=this.userService.getToken()
-      this.providerService.DeleteProviderById(id, this.token).subscribe({
-        next:(response:any)=>{
-          console.log(response)
-          this.loadProviders()
-          this.changeStatus(0)
-          if (this.showSingleProvider) {
-            this.clearSearch()
-          }          
+
+      this.providerService.DeleteProviderById(id, token).subscribe({
+        next: () => {
+          this.loadProviders();
+          this.clearSearch();
+          Swal.fire('Eliminado', 'Proveedor eliminado correctamente.', 'success');
         },
-        error:(err:Error)=>{
-          console.log(err)
-          this.changeStatus(2)
+        error: (err: Error) => {
+          console.error(err);
+          Swal.fire('Error', 'No se pudo eliminar el proveedor.', 'error');
         }
       });
 
-    } else if (this.filterType === 'name') {
-      this.token=this.userService.getToken()
-      this.providerService.DeleteProviderByName(this.searchValue, this.token).subscribe({
-        next:(response:any)=>{
-          console.log(response)
-          this.loadProviders()
-          this.changeStatus(0)
-          if (this.showSingleProvider) {
-            this.clearSearch()
-          }   
+    } else {
+      this.providerService.DeleteProviderByName(this.searchValue, token).subscribe({
+        next: () => {
+          this.loadProviders();
+          this.clearSearch();
+          Swal.fire('Eliminado', 'Proveedor eliminado correctamente.', 'success');
         },
-        error:(err:Error)=>{
-          console.log(err)
-          this.changeStatus(2) 
+        error: (err: Error) => {
+          console.error(err);
+          Swal.fire('Error', 'No se pudo eliminar el proveedor.', 'error');
         }
       });
     }
-  }  
+  }
 
-  updateProvider(): void{
+  updateProvider(): void {
     if (!this.searchValue.trim()) {
-      this.status = 'Ingrese un valor de búsqueda.';
+      Swal.fire('Error', 'Ingrese un valor de búsqueda.', 'warning');
       return;
-    }    
+    }
+
+    const token = this.userService.getToken();
 
     if (this.filterType === 'id') {
       const id = parseInt(this.searchValue, 10);
       if (isNaN(id)) {
-        this.status = 'El ID debe ser un número.';
+        Swal.fire('Error', 'El ID debe ser un número.', 'error');
         return;
       }
 
-      this.token=this.userService.getToken()    
-      this.providerService.GetProviderById(id, this.token).subscribe({
+      this.providerService.GetProviderById(id, token).subscribe({
         next: (response: Provider) => {
-          console.log(response)
           this.provider = response;
           this.isEditing = true;
         },
         error: (err) => {
           console.error(err);
-          this.changeStatus(2)
+          Swal.fire('Error', 'No se encontró el proveedor.', 'error');
         }
       });
 
-    } else if (this.filterType === 'name') {
-      this.token=this.userService.getToken()    
-      this.providerService.GetProviderByName(this.searchValue.trim(),this.token).subscribe({
+    } else {
+      this.providerService.GetProviderByName(this.searchValue.trim(), token).subscribe({
         next: (response: Provider) => {
-          console.log(response)
           this.provider = response;
           this.isEditing = true;
         },
         error: (err) => {
           console.error(err);
-          this.changeStatus(2)
+          Swal.fire('Error', 'No se encontró el proveedor.', 'error');
         }
       });
-    }    
+    }
   }
 
   search(): void {
-    this.providers = [];
-    this.status = -1;
-
     if (!this.searchValue.trim()) {
-      this.status = 'Ingrese un valor de búsqueda.';
+      Swal.fire('Error', 'Ingrese un valor de búsqueda.', 'warning');
       return;
     }
+
+    const token = this.userService.getToken();
+
+    const handleResponse = (response: Provider) => {
+      this.providers = [response];
+      this.showSingleProvider = true;
+      if (this.checkTravels) {
+        clearInterval(this.checkTravels);
+        this.checkTravels = null;
+      }
+    };
+
+    const handleError = () => {
+      this.providers = [];
+      this.showSingleProvider = false;
+      Swal.fire('Error', 'Proveedor no encontrado.', 'error');
+    };
 
     if (this.filterType === 'id') {
       const id = parseInt(this.searchValue, 10);
       if (isNaN(id)) {
-        this.status = 'El ID debe ser un número.';
+        Swal.fire('Error', 'El ID debe ser un número.', 'error');
         return;
       }
 
-      this.token=this.userService.getToken()    
-      this.providerService.GetProviderById(id, this.token).subscribe({
-        next: (response: Provider) => {
-          console.log(response)
-          this.providers = [response];
-          this.showSingleProvider = true
-          if (this.checkTravels) {
-            clearInterval(this.checkTravels)
-            this.checkTravels = null
-          }
-        },
-        error: (err) => {
-          console.error(err);
-          this.providers = []
-          this.showSingleProvider = false
-        }
-      });
-
-    } else if (this.filterType === 'name') {
-      this.token=this.userService.getToken()    
-      this.providerService.GetProviderByName(this.searchValue.trim(),this.token).subscribe({
-        next: (response: Provider) => {
-          console.log(response)
-          this.providers = [response];
-          this.showSingleProvider = true
-          if (this.checkTravels) {
-            clearInterval(this.checkTravels)
-            this.checkTravels = null
-          }
-        },
-        error: (err) => {
-          console.error(err);
-          this.providers = []
-          this.showSingleProvider = false
-        }
-      });
+      this.providerService.GetProviderById(id, token).subscribe({ next: handleResponse, error: handleError });
+    } else {
+      this.providerService.GetProviderByName(this.searchValue.trim(), token).subscribe({ next: handleResponse, error: handleError });
     }
   }
 
-  public clearSearch() {
-    this.loadProviders()
-    this.showSingleProvider = false
-    this.searchValue = ''
+  clearSearch() {
+    this.loadProviders();
+    this.showSingleProvider = false;
+    this.searchValue = '';
+    this.isEditing = false;
   }
 
   resetForm(form: any) {
     this.provider = new Provider(0, "", "");
     this.searchValue = '';
     this.isEditing = false;
-    form.resetForm(); // limpia ngModel
+    form.resetForm();
   }
 
   onSubmit(form: any) {
-    this.token = this.userService.getToken()
+    const token = this.userService.getToken();
+
     const createData = {
       name: this.provider.nombre,
       descript: this.provider.descrip
-    };      
-    
+    };
+
     if (this.isEditing) {
-      // UPDATE
       if (this.filterType === 'id') {
         const id = parseInt(this.searchValue, 10);
         if (isNaN(id)) {
-          this.status = 'El ID debe ser un número.';
+          Swal.fire('Error', 'El ID debe ser un número.', 'error');
           return;
         }
 
-        const updateDataId = {
-          name: this.provider.nombre,
-          descript: this.provider.descrip
-        };
-
-        this.providerService.UpdateProviderById(id, updateDataId, this.token).subscribe({
-          next:(response:any)=>{
-            console.log(response)
+        this.providerService.UpdateProviderById(id, createData, token).subscribe({
+          next: () => {
             this.resetForm(form);
             this.loadProviders();
-            this.changeStatus(0);
-            // form.reset()
+            Swal.fire('Actualizado', 'Proveedor actualizado correctamente.', 'success');
           },
-          error:(err:Error)=>{
-            console.log(err)
-            this.changeStatus(2)
+          error: (err: Error) => {
+            console.error(err);
+            Swal.fire('Error', 'No se pudo actualizar el proveedor.', 'error');
           }
         });
 
-      } else if (this.filterType === 'name') {
+      } else {
         const updateData = {
-          new_name: this.provider.nombre || "",
-          descript: this.provider.descrip || ""
+          new_name: this.provider.nombre,
+          descript: this.provider.descrip
         };
 
-        this.providerService.UpdateProviderByName(this.searchValue, updateData, this.token).subscribe({
-          next:(response:any)=>{
-            console.log(response)
+        this.providerService.UpdateProviderByName(this.searchValue, updateData, token).subscribe({
+          next: () => {
             this.resetForm(form);
             this.loadProviders();
-            this.changeStatus(0);
-            // form.reset()
+            Swal.fire('Actualizado', 'Proveedor actualizado correctamente.', 'success');
           },
-          error:(err:Error)=>{
-            console.log(err)
-            this.changeStatus(2)
+          error: (err: Error) => {
+            console.error(err);
+            Swal.fire('Error', 'No se pudo actualizar el proveedor.', 'error');
           }
         });
       }
 
     } else {
-      // CREATE
-      this.providerService.CreateProvider(createData, this.token).subscribe({
+      this.providerService.CreateProvider(createData, token).subscribe({
         next: (response) => {
-          console.log(response)
           if (response.generated_id) {
-            // form.reset()
             this.resetForm(form);
-            this.loadProviders()
-            this.changeStatus(0)
+            this.loadProviders();
+            Swal.fire('Éxito', 'Proveedor creado correctamente.', 'success');
           } else {
-            this.changeStatus(1)
+            Swal.fire('Advertencia', 'No se pudo crear el proveedor.', 'warning');
           }
         },
-        error: (error: Error) => {
-          console.log(error)
-          this.changeStatus(2)
+        error: (err: Error) => {
+          console.error(err);
+          Swal.fire('Error', 'Ocurrió un error al crear el proveedor.', 'error');
         }
-      })
+      });
     }
   }
 }
